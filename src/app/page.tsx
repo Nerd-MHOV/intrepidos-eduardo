@@ -1,101 +1,101 @@
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import { Button } from "@/components/ui/button";
+import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <MaxWidthWrapper>
+      <section className="bg-black/60 backdrop-blur-lg my-10 rounded-sm overflow-hidden">
+        <div className="flex justify-center items-center">
+          <div className="relative hidden lg:block min-w-[350px] h-full">
+            <Image
+              src="/logo-fundo.png"
+              alt="logo"
+              width={500}
+              height={500}
+              className="object-cover"
+            />
+          </div>
+          <div className="relative">
+            <div className="w-full h-[calc(100vh-3.5rem)] relative z-0">
+              <Image
+                src="/material/poster-14-gradiente.png"
+                alt="Intrépidos"
+                layout="fill"
+                className="object-cover object-top z-0"
+              />
+            </div>
+            <p className="text-white text-justify p-6 lg:p-8 font-bold text-lg -mt-28 z-10 relative">
+              E se a terra estivesse a beira da destruição, ameaçada por um
+              inimigo implacável? Apenas um grupo de heróis intrépidos, cada um
+              com habilidades extraordinárias, segredos profundos e
+              personalidades únicas, pode impedir o fim da humanidade. Utopia,
+              Látex, Gnóstica, Furtivo, Alígera, General Dinâmico e Maninguari
+              são mais do que pessoas comuns,{" "}
+              <span className="bg-white text-black px-1">
+                eles são a última esperança de nosso mundo
+              </span>
+              . Nesta batalha épica pelo destino do planeta, falhar não é uma
+              opção. Embarque na jornada desses heróis e descubra se eles tem o
+              que é preciso para salvar o que resta da raça humana.
+              <span className="bg-green-700 font-bold p-1">INTRÉPIDOS</span> é
+              uma historia de coragem, sacrifício e a luta pelo futuro.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <section className="backdrop-blur-lg mb-20 rounded-sm overflow-hidden">
+        <div className="flex flex-col lg:flex-row justify-center items-center py-2 px-12">
+          <p className="text-white text-left lg:text-center py-8 lg:p-8 drop-shadow-md shadow-lg text-lg order-1">
+            Sou <span className="bg-green-800 p-1">Eduardo Cagnotto</span>, 55
+            anos, casado, pai de dois filhos de 23 e 20 anos. Júnior e Kayla.
+            Casado com Regiane Karina Urbano Cagnotto há 25 anos. Sempre gostei
+            de ler e escrever. Desde novo, já escrevia e imaginava aventuras. A
+            partir dos{" "}
+            <span className="bg-white text-black px-1 font-bold">
+              quarenta anos
+            </span>
+            , comecei a dar a vida à minha obra até finalizar no ano de 2024.
+          </p>
+          <Image
+            src="/material/autor.png"
+            alt="autor"
+            width={300}
+            height={400}
+            className="object-cover drop-shadow-xl order-0 lg:order-2"
+          />
+        </div>
+      </section>
+
+      <section className="flex justify-around items-center gap-10 flex-wrap my-10">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div
+            key={index}
+            className="relative w-[200px] h-auto flex flex-col items-center gap-2 bg-black/60 rounded-sm overflow-hidden backdrop-blur-lg text-white"
           >
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src={`/material/poster-${index + 1}.jpeg`}
+              alt={`capa-${index + 1}`}
+              height={300}
+              width={300}
+              className="object-cover"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <div className="w-full justify-between items-center p-2">
+              <div className="flex flex-col">
+                <h1>Item {index}</h1>
+                <p>teste de card</p>
+              </div>
+              <div className="w-full flex justify-end mt-1">
+                <Button size="sm">
+                  <ShoppingBag /> Comprar
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
+    </MaxWidthWrapper>
   );
 }
