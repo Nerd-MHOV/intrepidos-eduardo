@@ -78,7 +78,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="backdrop-blur-lg mb-20 rounded-sm overflow-hidden">
+        <section className="sm:backdrop-blur-lg mb-20 rounded-sm overflow-hidden">
           {/* <Icons.underline className="z-0 block pointer-events-none absolute inset-x-0 -bottom-6 text-[#998279] " /> */}
           <div className="flex flex-col lg:flex-row justify-center items-center py-2 px-12">
             <motion.p
@@ -113,8 +113,8 @@ export default function Home() {
               src="/material/intrepidos.gif"
               className="object-cover"
               alt="gif"
-              width={400}
-              height={500}
+              width={320}
+              height={300}
             />
           </div>
           <motion.div
