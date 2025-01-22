@@ -19,12 +19,12 @@ export default function Home() {
               />
             </div>
             <div className="relative">
-              <div className="w-full h-[calc(100vh-3.5rem)] relative z-0">
+              <div className="w-full h-[calc(100vh-28rem)] sm:h-[calc(100vh-27rem)] lg:h-[calc(100vh-10rem)]  relative z-0">
                 <Image
                   src="/material/poster-14-gradiente.png"
                   alt="Intrépidos"
                   layout="fill"
-                  className="object-cover object-top z-0"
+                  className="object-contain object-top z-0"
                 />
               </div>
               <p className="text-white text-justify p-6 lg:p-8 font-semibold text-xl -mt-28 z-10 relative">
