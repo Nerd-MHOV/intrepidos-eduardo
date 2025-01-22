@@ -1,7 +1,28 @@
+"use client";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
 import { Check, ShoppingBag, Star } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 1 } },
+};
+
+const slideIn = (direction: "left" | "right" | "up" | "down") => {
+  const variants = {
+    left: { x: -100, opacity: 0 },
+    right: { x: 100, opacity: 0 },
+    up: { y: -100, opacity: 0 },
+    down: { y: 100, opacity: 0 },
+  };
+
+  return {
+    hidden: variants[direction],
+    visible: { x: 0, y: 0, opacity: 1, transition: { duration: 1 } },
+  };
+};
 
 export default function Home() {
   return (
@@ -9,7 +30,12 @@ export default function Home() {
       <MaxWidthWrapper className="">
         <section className="bg-black/60 backdrop-blur-lg my-10 overflow-hidden">
           <div className="flex justify-center items-center">
-            <div className="relative hidden lg:block min-w-[350px] h-full">
+            <motion.div
+              className="relative hidden lg:block min-w-[350px] h-full"
+              initial="hidden"
+              animate="visible"
+              variants={slideIn("left")}
+            >
               <Image
                 src="/logo-fundo.png"
                 alt="logo"
@@ -17,9 +43,9 @@ export default function Home() {
                 height={500}
                 className="object-cover"
               />
-            </div>
+            </motion.div>
             <div className="relative">
-              <div className="min-w-full min-h-[60vh] sm:min-h-[80vh] lg:min-h-[90vh] h-auto relative z-0">
+              <div className="min-w-full min-h-[58vh] sm:min-h-[80vh] lg:min-h-[90vh] h-auto relative z-0">
                 <Image
                   src="/material/poster-14-gradiente.png"
                   alt="Intrépidos"
@@ -27,7 +53,12 @@ export default function Home() {
                   className="object-cover object-center z-0"
                 />
               </div>
-              <p className="text-white text-justify p-6 lg:p-8 font-semibold text-xl -mt-28 z-10 relative">
+              <motion.p
+                className="text-white text-justify p-6 lg:p-8 font-semibold text:lg sm:text-xl -mt-28 z-10 relative"
+                initial="hidden"
+                animate="visible"
+                variants={slideIn("down")}
+              >
                 E se a terra estivesse a beira da destruição, ameaçada por um
                 inimigo implacável? Apenas um grupo de heróis intrépidos, cada
                 um com habilidades extraordinárias, segredos profundos e
@@ -42,7 +73,7 @@ export default function Home() {
                 o que é preciso para salvar o que resta da raça humana.
                 <span className="bg-green-700 font-bold p-1">INTRÉPIDOS</span> é
                 uma historia de coragem, sacrifício e a luta pelo futuro.
-              </p>
+              </motion.p>
             </div>
           </div>
         </section>
@@ -50,7 +81,12 @@ export default function Home() {
         <section className="backdrop-blur-lg mb-20 rounded-sm overflow-hidden">
           {/* <Icons.underline className="z-0 block pointer-events-none absolute inset-x-0 -bottom-6 text-[#998279] " /> */}
           <div className="flex flex-col lg:flex-row justify-center items-center py-2 px-12">
-            <p className="text-white text-left lg:text-center py-8 lg:p-8 text-lg order-1">
+            <motion.p
+              initial="hidden"
+              whileInView="visible"
+              variants={slideIn("left")}
+              className="text-white text-left lg:text-center py-8 lg:p-8 text-lg order-1"
+            >
               Sou <span className="bg-green-800 p-1">Eduardo Cagnotto</span>, 55
               anos, casado, pai de dois filhos de 23 e 20 anos. Júnior e Kayla.
               Casado com Regiane Karina Urbano Cagnotto há 25 anos. Sempre
@@ -60,7 +96,7 @@ export default function Home() {
                 quarenta anos
               </span>
               , comecei a dar a vida à minha obra até finalizar no ano de 2024.
-            </p>
+            </motion.p>
             <Image
               src="/material/autor.png"
               alt="autor"
@@ -81,7 +117,12 @@ export default function Home() {
               height={500}
             />
           </div>
-          <div className="relative text-center lg:text-left flex flex-col items-center lg:items-start">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={slideIn("right")}
+            className="relative text-center lg:text-left flex flex-col items-center lg:items-start"
+          >
             <ul className="space-y-4 text-left font-medium flex flex-col items-center sm:items-start">
               <div className="space-y-4 text-white">
                 <li className="flex gap-2 items-center text-left">
@@ -151,7 +192,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
       </MaxWidthWrapper>
       <div className="w-full relative overflow-hidden">
