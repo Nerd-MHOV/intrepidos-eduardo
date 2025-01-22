@@ -5,10 +5,10 @@ import { Check, ShoppingBag, Star } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1 } },
-};
+// const fadeIn = {
+//   hidden: { opacity: 0 },
+//   visible: { opacity: 1, transition: { duration: 1 } },
+// };
 
 const slideIn = (direction: "left" | "right" | "up" | "down") => {
   const variants = {
