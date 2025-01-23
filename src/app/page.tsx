@@ -1,9 +1,9 @@
+import CardItem from "@/components/CardItem";
 import HomeAuthor from "@/components/HomeAuthor";
 import HomeHero from "@/components/HomeHero";
 import HomeHighlights from "@/components/HomeHighlights";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { Button } from "@/components/ui/button";
-import { Check, ShoppingBag, Star } from "lucide-react";
+import { Check, Star } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -50,37 +50,50 @@ export default function Home() {
         <div className="absolute h-full w-full bg-[url(/bg2.svg)] top-40 z-0"></div>
         <MaxWidthWrapper className="left-0 top-0 h-full ">
           <section className="flex justify-around items-center gap-10 flex-wrap my-10">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div
-                key={index}
-                className="relative w-64 h-96 flex flex-col items-center gap-2 bg-black/60 rounded-lg overflow-hidden backdrop-blur-lg text-white drop-shadow-lg"
-              >
-                <Image
-                  src={`/material/poster-${index + 1}.jpeg`}
-                  alt={`capa-${index + 1}`}
-                  layout="fill"
-                  className="object-cover rounded-lg shadow-md drop-shadow-lg"
-                />
-                <div className="w-full justify-between items-center p-2 absolute bottom-0 left-0">
-                  <div className="">
-                    <span className="text-sm bg-white text-center font-semibold text-black p-2 rounded-full backdrop-blur-sm ">
-                      Poster
-                    </span>
-                    <h1 className="text-2xl font-black pt-1 mt-2 pl-1 uppercase drop-shadow-2xl bg-black/60 p-1 rounded">
-                      Item {index + 1}
-                    </h1>
-                  </div>
-                  <div className="w-full flex justify-end mt-1">
-                    <Button
-                      size="sm"
-                      className="bg-green-700 text-white hover:bg-green-800 rounded"
-                    >
-                      <ShoppingBag /> Comprar
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <CardItem
+              id="livro"
+              src="/material/fisico.jpeg"
+              title="Livro"
+              value={90}
+            />
+
+            <CardItem
+              id="luminaria"
+              src="/material/placa-1.jpeg"
+              title="Luminarias"
+              value={150}
+            />
+
+            <CardItem
+              id="copo"
+              src="/material/copo-1.jpeg"
+              title="Copos"
+              value={40}
+            />
+            <CardItem
+              id="camiseta-fan"
+              src="/material/camiseta-1.jpeg"
+              title="Camiseta FAN"
+              value={67}
+            />
+            <CardItem
+              id="camiseta-herois"
+              src="/material/camiseta-2.jpeg"
+              title="Camiseta Heróis"
+              value={67}
+            />
+            <CardItem
+              id="caneca"
+              src="/material/caneca.jpeg"
+              title="Canecas"
+              value={50}
+            />
+            <CardItem
+              id="poster"
+              src="/material/poster-1.jpeg"
+              title="Posters"
+              value={50}
+            />
           </section>
         </MaxWidthWrapper>
 
