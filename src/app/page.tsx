@@ -80,7 +80,7 @@ export default function Home() {
 
         <section className="sm:backdrop-blur-lg mb-20 rounded-sm overflow-hidden">
           {/* <Icons.underline className="z-0 block pointer-events-none absolute inset-x-0 -bottom-6 text-[#998279] " /> */}
-          <div className="flex flex-col lg:flex-row justify-center items-center py-2 px-12">
+          <div className="flex flex-col lg:flex-row justify-center items-center py-2 px-12 overflow-hidden">
             <motion.p
               initial="hidden"
               whileInView="visible"
@@ -107,7 +107,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="my-10 flex flex-wrap justify-around gap-8 items-center">
+        <section className="my-10 flex overflow-hidden flex-wrap justify-around gap-8 items-center">
           <div className="overflow-hidden rounded-full opacity-90 w-80 h-80 flex justify-center items-center shadow-lg">
             <Image
               src="/material/intrepidos.gif"
