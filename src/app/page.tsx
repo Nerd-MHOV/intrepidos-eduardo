@@ -1,28 +1,10 @@
-"use client";
+import HomeAuthor from "@/components/HomeAuthor";
+import HomeHero from "@/components/HomeHero";
+import HomeHighlights from "@/components/HomeHighlights";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
 import { Check, ShoppingBag, Star } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-
-// const fadeIn = {
-//   hidden: { opacity: 0 },
-//   visible: { opacity: 1, transition: { duration: 1 } },
-// };
-
-const slideIn = (direction: "left" | "right" | "up" | "down") => {
-  const variants = {
-    left: { x: -100, opacity: 0 },
-    right: { x: 100, opacity: 0 },
-    up: { y: -100, opacity: 0 },
-    down: { y: 100, opacity: 0 },
-  };
-
-  return {
-    hidden: variants[direction],
-    visible: { x: 0, y: 0, opacity: 1, transition: { duration: 1 } },
-  };
-};
 
 export default function Home() {
   return (
@@ -30,73 +12,14 @@ export default function Home() {
       <MaxWidthWrapper className="">
         <section className="bg-black/60 backdrop-blur-lg my-10 overflow-hidden">
           <div className="flex justify-center items-center">
-            <motion.div
-              className="relative hidden lg:block min-w-[350px] h-full"
-              initial="hidden"
-              animate="visible"
-              variants={slideIn("left")}
-            >
-              <Image
-                src="/logo-fundo.png"
-                alt="logo"
-                width={500}
-                height={500}
-                className="object-cover"
-              />
-            </motion.div>
-            <div className="relative">
-              <div className="min-w-full min-h-[58vh] sm:min-h-[80vh] lg:min-h-[90vh] h-auto relative z-0">
-                <Image
-                  src="/material/poster-14-gradiente.png"
-                  alt="Intrépidos"
-                  layout="fill"
-                  className="object-cover object-center z-0"
-                />
-              </div>
-              <motion.p
-                className="text-white text-justify p-6 lg:p-8 font-semibold text:lg sm:text-xl -mt-28 z-10 relative"
-                initial="hidden"
-                animate="visible"
-                variants={slideIn("down")}
-              >
-                E se a terra estivesse a beira da destruição, ameaçada por um
-                inimigo implacável? Apenas um grupo de heróis intrépidos, cada
-                um com habilidades extraordinárias, segredos profundos e
-                personalidades únicas, pode impedir o fim da humanidade. Utopia,
-                Látex, Gnóstica, Furtivo, Alígera, General Dinâmico e Maninguari
-                são mais do que pessoas comuns,{" "}
-                <span className="bg-white text-black px-1">
-                  eles são a última esperança de nosso mundo
-                </span>
-                . Nesta batalha épica pelo destino do planeta, falhar não é uma
-                opção. Embarque na jornada desses heróis e descubra se eles tem
-                o que é preciso para salvar o que resta da raça humana.
-                <span className="bg-green-700 font-bold p-1">INTRÉPIDOS</span> é
-                uma historia de coragem, sacrifício e a luta pelo futuro.
-              </motion.p>
-            </div>
+            <HomeHero />
           </div>
         </section>
 
         <section className="sm:backdrop-blur-lg mb-20 rounded-sm overflow-hidden">
           {/* <Icons.underline className="z-0 block pointer-events-none absolute inset-x-0 -bottom-6 text-[#998279] " /> */}
           <div className="flex flex-col lg:flex-row justify-center items-center py-2 px-12 overflow-hidden">
-            <motion.p
-              initial="hidden"
-              whileInView="visible"
-              variants={slideIn("left")}
-              className="text-white text-left lg:text-center py-8 lg:p-8 text-lg order-1"
-            >
-              Sou <span className="bg-green-800 p-1">Eduardo Cagnotto</span>, 55
-              anos, casado, pai de dois filhos de 23 e 20 anos. Júnior e Kayla.
-              Casado com Regiane Karina Urbano Cagnotto há 25 anos. Sempre
-              gostei de ler e escrever. Desde novo, já escrevia e imaginava
-              aventuras. A partir dos{" "}
-              <span className="bg-white text-black px-1 font-bold">
-                quarenta anos
-              </span>
-              , comecei a dar a vida à minha obra até finalizar no ano de 2024.
-            </motion.p>
+            <HomeAuthor />
             <Image
               src="/material/autor.png"
               alt="autor"
@@ -117,82 +40,8 @@ export default function Home() {
               height={300}
             />
           </div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={slideIn("right")}
-            className="relative text-center lg:text-left flex flex-col items-center lg:items-start"
-          >
-            <ul className="space-y-4 text-left font-medium flex flex-col items-center sm:items-start">
-              <div className="space-y-4 text-white">
-                <li className="flex gap-2 items-center text-left">
-                  <Check className="h-6 w-6 shrink-0 text-green-600" />
-                  Emoção em cada capítulo
-                </li>
-                <li className="flex gap-2 items-center text-left">
-                  <Check className="h-6 w-6 shrink-0 text-green-600" />
-                  Batalhas Eletrizantes
-                </li>
-                <li className="flex gap-2 items-center text-left">
-                  <Check className="h-6 w-6 shrink-0 text-green-600" />
-                  Desenvolvimento dos personagens
-                </li>
-              </div>
-            </ul>
-            <div className="mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-6">
-              <div className="flex -space-x-4">
-                <Image
-                  src="/users/user-1.png"
-                  alt="user image"
-                  width={50}
-                  height={50}
-                  className="inline-block h-12 w-12 rounded-full ring-2 ring-slate-100"
-                />
-                <Image
-                  src="/users/user-2.png"
-                  alt="user image"
-                  width={50}
-                  height={50}
-                  className="inline-block h-12 w-12 rounded-full ring-2 ring-slate-100"
-                />
-                <Image
-                  src="/users/user-3.png"
-                  alt="user image"
-                  width={50}
-                  height={50}
-                  className="inline-block h-12 w-12 rounded-full ring-2 ring-slate-100"
-                />
-                <Image
-                  src="/users/user-4.jpg"
-                  alt="user image"
-                  width={50}
-                  height={50}
-                  className="inline-block h-12 w-12 rounded-full ring-2 ring-slate-100"
-                />
-                <Image
-                  src="/users/user-5.jpg"
-                  alt="user image"
-                  width={50}
-                  height={50}
-                  className="inline-block h-12 w-12 object-cover rounded-full ring-2 ring-slate-100"
-                />
-              </div>
 
-              <div className="flex flex-col justify-between items-center sm:items-start">
-                <div className="flex gap-1">
-                  <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                  <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                  <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                  <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                  <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                </div>
-
-                <p className="text-white mt-2">
-                  <span className="font-semibold">+1.250</span> Leitores
-                </p>
-              </div>
-            </div>
-          </motion.div>
+          <HomeHighlights />
         </section>
       </MaxWidthWrapper>
       <div className="w-full relative overflow-hidden">
