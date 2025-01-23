@@ -36,6 +36,8 @@ export default function Home() {
               src="/material/intrepidos.gif"
               className="object-cover"
               alt="gif"
+              priority={false}
+              quality={50}
               width={320}
               height={300}
             />
