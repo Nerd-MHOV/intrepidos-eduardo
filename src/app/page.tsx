@@ -107,7 +107,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="my-10 flex overflow-hidden flex-wrap justify-around gap-8 items-center">
+        <section className="my-10 flex overflow-hidden flex-wrap justify-around gap-8 items-center w-full">
           <div className="overflow-hidden rounded-full opacity-90 w-80 h-80 flex justify-center items-center shadow-lg">
             <Image
               src="/material/intrepidos.gif"
