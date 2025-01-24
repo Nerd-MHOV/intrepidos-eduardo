@@ -44,7 +44,7 @@ const DesignLuminaria = () => {
   );
   return (
     <div className="relative mt-20 grid text-pin grid-cols-1 lg:grid-cols-3 mb-20  border-2 border-gray-800 overflow-hidden rounded-lg  bg-black/75 backdrop-blur-lg transition-all ">
-      <div className="relative h-[37rem] overflow-hidden col-span-2 w-full max-w-4xl items-center justify-center ">
+      <div className="relative h-[30rem] sm:h-[37rem]  overflow-hidden col-span-2 w-full max-w-4xl items-center justify-center ">
         <Carousel
           className="w-full h-full p-0 m-0"
           plugins={[plugin.current]}
