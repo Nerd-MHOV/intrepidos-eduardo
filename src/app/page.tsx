@@ -31,15 +31,14 @@ export default function Home() {
         </section>
 
         <section className="my-10 flex overflow-hidden flex-wrap justify-around gap-8 items-center w-full">
-          <div className="overflow-hidden rounded-full opacity-90 w-80 h-80 flex justify-center items-center shadow-lg">
+          <div className="overflow-hidden relative rounded-full w-80 h-80 flex justify-center items-center shadow-lg">
             <Image
               src="/material/intrepidos.gif"
               className="object-cover"
               alt="gif"
               priority={false}
-              quality={50}
-              width={320}
-              height={300}
+              quality={1}
+              layout="fill"
             />
           </div>
 
