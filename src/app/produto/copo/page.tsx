@@ -2,14 +2,8 @@ import React from "react";
 import DesignPage from "../../../components/design";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import CopoSide from "./copo-side";
-export const COPO_OBJ = [
-  {
-    label: "Preto",
-    value: "preto",
-    tw: "zinc-900",
-    image: "/material/copo-1.jpeg",
-  }, // bg-zinc-900 border-zinc-900
-] as const;
+import { COPO_OBJ } from "./object";
+
 const Page = () => {
   return (
     <div className="min-h-[calc(100vh-172px)] ">
