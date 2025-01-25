@@ -2,7 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Label, RadioGroup } from "@headlessui/react";
-import { POSTER_OBJ } from "./page";
+import { POSTER_OBJ } from "./object";
 
 const PosterSide = () => {
   const [color, setColor] = React.useState<(typeof POSTER_OBJ)[number]>(

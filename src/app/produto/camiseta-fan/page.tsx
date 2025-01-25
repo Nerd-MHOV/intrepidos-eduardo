@@ -2,32 +2,7 @@ import React from "react";
 import DesignPage from "../../../components/design";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import CamisetaFanSide from "./camiseta-fan-side";
-export const CAMISTA_FAN_OBJ = [
-  {
-    label: "Preta-P",
-    value: "preta-p",
-    size: "P",
-    tw: "zinc-900",
-  }, // bg-zinc-900 border-zinc-900
-  {
-    label: "Preta-M",
-    value: "preta-m",
-    size: "M",
-    tw: "zinc-900",
-  }, // bg-zinc-900 border-zinc-900
-  {
-    label: "Preta-G",
-    value: "preta-g",
-    size: "G",
-    tw: "zinc-900",
-  }, // bg-zinc-900 border-zinc-900
-  {
-    label: "Preta-GG",
-    value: "preta-gg",
-    size: "GG",
-    tw: "zinc-900",
-  }, // bg-zinc-900 border-zinc-900
-] as const;
+
 const Page = () => {
   return (
     <div className="min-h-[calc(100vh-172px)] ">

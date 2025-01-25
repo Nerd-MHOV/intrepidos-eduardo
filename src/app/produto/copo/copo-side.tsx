@@ -2,7 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Label, RadioGroup } from "@headlessui/react";
-import { COPO_OBJ } from "./page";
+import { COPO_OBJ } from "./object";
 
 const CopoSide = () => {
   const [color, setColor] = React.useState<(typeof COPO_OBJ)[number]>(

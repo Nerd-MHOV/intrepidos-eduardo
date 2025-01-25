@@ -2,7 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Label, RadioGroup } from "@headlessui/react";
-import { CANECA_OBJ } from "./page";
+import { CANECA_OBJ } from "./object";
 
 const CanecaSide = () => {
   const [color, setColor] = React.useState<(typeof CANECA_OBJ)[number]>(

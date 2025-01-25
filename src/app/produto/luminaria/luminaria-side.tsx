@@ -2,7 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Label, RadioGroup } from "@headlessui/react";
-import { LUMINARIA_OBJ } from "./page";
+import { LUMINARIA_OBJ } from "./object";
 
 const LuminariaSide = () => {
   const [color, setColor] = React.useState<(typeof LUMINARIA_OBJ)[number]>(

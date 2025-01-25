@@ -2,14 +2,8 @@ import React from "react";
 import DesignPage from "../../../components/design";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import CanecaSide from "./caneca-side";
-export const CANECA_OBJ = [
-  {
-    label: "Branca",
-    value: "branca",
-    tw: "zinc-100",
-    image: "/material/caneca.jpeg",
-  }, // bg-zinc-100 border-zinc-100
-] as const;
+import { CANECA_OBJ } from "./object";
+
 const Page = () => {
   return (
     <div className="min-h-[calc(100vh-172px)] ">

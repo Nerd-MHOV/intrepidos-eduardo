@@ -2,11 +2,11 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Label, RadioGroup } from "@headlessui/react";
-import { CAMISTA_FAN_OBJ } from "./page";
+import { CAMISETA_FAN_OBJ } from "./object";
 
 const CamisetaFanSide = () => {
-  const [color, setColor] = React.useState<(typeof CAMISTA_FAN_OBJ)[number]>(
-    CAMISTA_FAN_OBJ[0]
+  const [color, setColor] = React.useState<(typeof CAMISETA_FAN_OBJ)[number]>(
+    CAMISETA_FAN_OBJ[0]
   );
 
   return (
@@ -27,7 +27,7 @@ const CamisetaFanSide = () => {
               Tamanho: {color.size}
             </Label>
             <div className="mt-3 flex items-center space-x-3">
-              {CAMISTA_FAN_OBJ.map((color) => (
+              {CAMISETA_FAN_OBJ.map((color) => (
                 <RadioGroup.Option
                   key={color.label}
                   value={color}
