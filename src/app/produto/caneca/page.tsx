@@ -1,26 +1,14 @@
 import React from "react";
 import DesignPage from "../../../components/design";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import LuminariaSide from "./luminaria-side";
-export const LUMINARIA_OBJ = [
+import CanecaSide from "./caneca-side";
+export const CANECA_OBJ = [
   {
-    label: "Branco",
-    value: "branco",
+    label: "Branca",
+    value: "branca",
     tw: "zinc-100",
-    image: "/material/placa-1.jpeg",
+    image: "/material/caneca.jpeg",
   }, // bg-zinc-100 border-zinc-100
-  {
-    label: "Azul",
-    value: "blue",
-    tw: "blue-800",
-    image: "/material/placa-3.jpeg",
-  }, // bg-blue-800 border-blue-800
-  {
-    label: "Rosa",
-    value: "rose",
-    tw: "pink-700",
-    image: "/material/placa-2.jpeg",
-  }, // bg-pink-700 border-pink-700
 ] as const;
 const Page = () => {
   return (
@@ -36,13 +24,13 @@ const Page = () => {
       />
       <MaxWidthWrapper>
         <DesignPage
-          images={LUMINARIA_OBJ.map((image) => ({
+          images={CANECA_OBJ.map((image) => ({
             label: image.label,
             image: image.image,
           }))}
-          price="R$ 150,00"
+          price="R$ 50,00"
         >
-          <LuminariaSide />
+          <CanecaSide />
         </DesignPage>
       </MaxWidthWrapper>
     </div>
