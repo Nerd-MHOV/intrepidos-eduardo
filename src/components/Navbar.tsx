@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
-import { ShoppingCart } from "lucide-react";
-import { Button } from "./ui/button";
+// import { ShoppingCart } from "lucide-react";
+// import { Button } from "./ui/button";
+import { CartMenu } from "./CartMenu";
 
 const Navbar = async () => {
   return (
-    <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-800 bg-black/75 backdrop-blur-lg transition-all">
+    <nav className="sticky z-[10] h-14 inset-x-0 top-0 w-full border-b border-gray-800 bg-black/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-800">
           <Link
@@ -20,9 +21,10 @@ const Navbar = async () => {
           >
             INTRÉPIDOS
           </Link>
-          <Button variant={"ghost"} className="hover:bg-green-800">
+          {/* <Button variant={"ghost"} className="hover:bg-green-800">
             <ShoppingCart className="text-white" />
-          </Button>
+          </Button> */}
+          <CartMenu />
         </div>
       </MaxWidthWrapper>
     </nav>

@@ -17,4 +17,4 @@ export const LUMINARIA_OBJ = [
     tw: "pink-700",
     image: "/material/placa-2.jpeg",
   }, // bg-pink-700 border-pink-700
-] as const;
+];

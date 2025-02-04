@@ -1,10 +1,22 @@
 import React from "react";
 import DesignPage from "../../../components/design";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import CanecaSide from "./caneca-side";
-import { CANECA_OBJ } from "./object";
+import { Products } from "../../../products/products";
+import { notFound } from "next/navigation";
 
-const Page = () => {
+const Page = async ({
+  params,
+}: {
+  params: Promise<{
+    id: string;
+  }>;
+}) => {
+  const { id } = await params;
+  const product = Products.find((product) => product.id === id);
+
+  console.log(product);
+  if (!product) return notFound();
+
   return (
     <div className="min-h-[calc(100vh-172px)] ">
       <div
@@ -17,14 +29,8 @@ const Page = () => {
         }}
       />
       <MaxWidthWrapper>
-        <DesignPage
-          images={CANECA_OBJ.map((image) => ({
-            label: image.label,
-            image: image.image,
-          }))}
-          price="R$ 50,00"
-        >
-          <CanecaSide />
+        <DesignPage product={product}>
+          <product.side />
         </DesignPage>
       </MaxWidthWrapper>
     </div>

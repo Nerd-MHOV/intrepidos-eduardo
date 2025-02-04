@@ -71,4 +71,4 @@ export const POSTER_OBJ = [
     tw: "zinc-300",
     image: "/material/poster-14.jpeg",
   }, // bg-zinc-300 border-zinc-300
-] as const;
+];

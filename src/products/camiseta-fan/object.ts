@@ -23,4 +23,4 @@ export const CAMISETA_FAN_OBJ = [
     size: "GG",
     tw: "zinc-900",
   }, // bg-zinc-900 border-zinc-900
-] as const;
+];
