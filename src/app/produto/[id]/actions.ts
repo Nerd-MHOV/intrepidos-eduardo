@@ -2,6 +2,7 @@
 
 import { stripe } from "@/lib/stripe";
 import { CartItem } from "@/store/slices/cartSlice";
+import { Products } from "../products/products";
 
 export const createCheckoutSession = async ({
   products,
@@ -14,12 +15,14 @@ export const createCheckoutSession = async ({
 }) => {
   const line_items = await Promise.all(
     products.map(async (product) => {
+      const price = Products.find((p) => p.id === product.id)?.price;
+      if (!price) throw new Error("Product not found");
       const stripeProduct = await stripe.products.create({
         name: product.name,
         images: [`${process.env.BASE_URL}/${product.image}`],
         default_price_data: {
           currency: "brl",
-          unit_amount: product.price * 100,
+          unit_amount: price * 100,
         },
       });
 
