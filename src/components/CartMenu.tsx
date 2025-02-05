@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks/hooks";
 import {
   decrementQty,
   incrementQty,
-  removeAllProductsFromCart,
+  // removeAllProductsFromCart, // TODO: Success page to clear cart
   removeProductFromCart,
 } from "@/store/slices/cartSlice";
 import {
@@ -26,41 +26,32 @@ import {
   Trash,
 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { createCheckoutSession } from "@/app/produto/[id]/actions";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export function CartMenu() {
-  const [loading, setLoading] = useState(false);
-  async function checkout() {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    setLoading(true);
-    try {
-      const response = await fetch(`${baseUrl}/api/checkout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ products: cartItems }),
-      });
-
-      const data = await response.json();
-      console.log(data);
-
-      if (data?.url) {
-        // console.log(response.url);
-        const url = data?.url;
-        setLoading(false);
-        console.log(url);
-        dispatch(removeAllProductsFromCart());
-        window.location.href = url;
-        // router.replace(url);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setLoading(false);
-    }
-  }
+  const router = useRouter();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const dispatch = useAppDispatch();
+
+  const { mutate: createPaymentSession, isPending: loading } = useMutation({
+    mutationKey: ["get-checkout-session"],
+    mutationFn: createCheckoutSession,
+    onSuccess: ({ url }) => {
+      if (url) router.push(url);
+      else throw new Error("Unable tto retrieve payment URL.");
+    },
+    onError: () => {
+      toast.error("Erro ao processar produtos, por favor tente novamente.");
+    },
+  });
+
+  async function checkout() {
+    createPaymentSession({ products: cartItems, frete: 100, cep: "00000000" });
+  }
+
   function handleRemove(id: string) {
     dispatch(removeProductFromCart(id));
   }

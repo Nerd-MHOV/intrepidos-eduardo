@@ -12,8 +12,9 @@ import { LUMINARIA_OBJ } from "./luminaria/object";
 import { POSTER_OBJ } from "./poster/object";
 import PosterSide from "./poster/poster-side";
 
-interface ProductProps {
+export interface ProductProps {
   id: string;
+  name: string;
   object: {
     label: string;
     value: string;
@@ -27,6 +28,7 @@ interface ProductProps {
 }
 export const Products: ProductProps[] = [
   {
+    name: "Camiseta Fan",
     id: "camiseta-fan",
     object: CAMISETA_FAN_OBJ,
     images: [
@@ -39,6 +41,7 @@ export const Products: ProductProps[] = [
     side: CamisetaFanSide,
   },
   {
+    name: "Camiseta Heróis",
     id: "camiseta-herois",
     object: CAMISETA_HEROIS_OBJ,
     images: [
@@ -51,6 +54,7 @@ export const Products: ProductProps[] = [
     side: CamisetaHeroisSide,
   },
   {
+    name: "Caneca Intrépidos",
     id: "caneca",
     object: CANECA_OBJ,
     images: CANECA_OBJ.map((image) => ({
@@ -61,6 +65,7 @@ export const Products: ProductProps[] = [
     side: CanecaSide,
   },
   {
+    name: "Copo Intrépidos",
     id: "copo",
     object: COPO_OBJ,
     images: COPO_OBJ.map((image) => ({
@@ -71,6 +76,7 @@ export const Products: ProductProps[] = [
     side: CopoSide,
   },
   {
+    name: "Luminária de LED",
     id: "luminaria",
     object: LUMINARIA_OBJ,
     images: LUMINARIA_OBJ.map((image) => ({
@@ -81,6 +87,7 @@ export const Products: ProductProps[] = [
     side: LuminariaSide,
   },
   {
+    name: "Poster Intrépidos",
     id: "poster",
     object: POSTER_OBJ,
     images: POSTER_OBJ.map((image) => ({

@@ -1,7 +1,7 @@
 import React from "react";
 import DesignPage from "../../../components/design";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { Products } from "../../../products/products";
+import { Products } from "../products/products";
 import { notFound } from "next/navigation";
 
 const Page = async ({

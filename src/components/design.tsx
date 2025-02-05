@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks/hooks";
 import { addProductToCart } from "@/store/slices/cartSlice";
 import { formatToReal } from "@/lib/utils";
-import { Products } from "@/products/products";
+import { Products } from "@/app/produto/products/products";
 
 const DesignPage = ({
   children,
@@ -23,7 +23,7 @@ const DesignPage = ({
   function handleAdd() {
     const newCartItem = {
       id: product.id,
-      name: product.id,
+      name: product.name,
       price: product.price,
       qty: 1,
       image: product.images[0].image,
