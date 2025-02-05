@@ -66,10 +66,12 @@ export const createCheckoutSession = async ({
         },
       },
     ],
-    metadata: {
-      products: JSON.stringify(products),
-      frete,
-      cep,
+    payment_intent_data: {
+      metadata: {
+        products: JSON.stringify(products),
+        frete: JSON.stringify(frete),
+        cep: JSON.stringify(cep),
+      },
     },
     line_items,
   });
