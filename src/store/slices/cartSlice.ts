@@ -1,3 +1,4 @@
+"use client";
 // src/store/productSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
@@ -17,6 +18,7 @@ interface CartState {
 
 // Safely retrieve cart items from localStorage
 const getInitialCartItems = (): CartItem[] => {
+  if (typeof window === "undefined") return [];
   try {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
@@ -32,6 +34,7 @@ const initialState: CartState = {
   cartItems: getInitialCartItems(),
 };
 const saveItemsToLocalStorage = (items: CartItem[]) => {
+  if (typeof window === "undefined") return;
   localStorage.setItem("cart", JSON.stringify(items));
 };
 const cartSlice = createSlice({
