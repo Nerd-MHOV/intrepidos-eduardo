@@ -3,12 +3,21 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Label, RadioGroup } from "@headlessui/react";
 import { CAMISETA_FAN_OBJ } from "./object";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const CamisetaFanSide = () => {
+  const router = useRouter();
+  const params = useSearchParams();
   const [color, setColor] = React.useState<(typeof CAMISETA_FAN_OBJ)[number]>(
     CAMISETA_FAN_OBJ[0]
   );
 
+  React.useEffect(() => {
+    const colorParams = params.get("color");
+    if (!colorParams) return;
+    const selectedColor = CAMISETA_FAN_OBJ.find((c) => c.value === colorParams);
+    if (selectedColor) setColor(selectedColor);
+  }, [params]);
   return (
     <div className="px-8 pb-12 pt-8">
       <h2 className="tracking-tight font-bold text-3xl">Camiseta FAN</h2>
@@ -21,6 +30,7 @@ const CamisetaFanSide = () => {
             value={color}
             onChange={(value) => {
               setColor(value);
+              router.push(`?color=${value.value}`);
             }}
           >
             <Label className="text-lg font-semibold">

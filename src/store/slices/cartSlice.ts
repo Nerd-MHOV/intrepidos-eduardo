@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 export interface CartItem {
   id: string;
   name: string;
+  type: string;
   price: number;
   image: string;
   qty: number;
@@ -39,7 +40,8 @@ const cartSlice = createSlice({
   reducers: {
     addProductToCart: (state, action: PayloadAction<CartItem>) => {
       const hasItem = state.cartItems.find(
-        (item) => item.id === action.payload.id
+        (item) =>
+          item.id === action.payload.id && item.type === action.payload.type
       );
       if (hasItem) {
         hasItem.qty += 1;
@@ -50,9 +52,10 @@ const cartSlice = createSlice({
       saveItemsToLocalStorage(state.cartItems);
       toast.success("Item Adicionado ao Carrinho");
     },
-    removeProductFromCart: (state, action: PayloadAction<string>) => {
+    removeProductFromCart: (state, action: PayloadAction<CartItem>) => {
       state.cartItems = state.cartItems.filter(
-        (item) => item.id !== action.payload
+        (item) =>
+          !(item.id == action.payload.id && item.type == action.payload.type)
       );
       saveItemsToLocalStorage(state.cartItems);
       toast.success("Item Removido");
@@ -62,25 +65,33 @@ const cartSlice = createSlice({
       saveItemsToLocalStorage(state.cartItems);
       // toast.success("All items cleared successfully");
     },
-    incrementQty: (state, action: PayloadAction<string>) => {
+    incrementQty: (state, action: PayloadAction<CartItem>) => {
       const item = state.cartItems.find(
-        (product) => product.id === action.payload
+        (product) =>
+          product.id === action.payload.id &&
+          product.type === action.payload.type
       );
       if (item) {
         item.qty += 1;
         saveItemsToLocalStorage(state.cartItems);
       }
     },
-    decrementQty: (state, action: PayloadAction<string>) => {
+    decrementQty: (state, action: PayloadAction<CartItem>) => {
       const item = state.cartItems.find(
-        (product) => product.id === action.payload
+        (product) =>
+          product.id === action.payload.id &&
+          product.type === action.payload.type
       );
       if (item && item.qty > 1) {
         item.qty -= 1;
         saveItemsToLocalStorage(state.cartItems);
       } else {
         state.cartItems = state.cartItems.filter(
-          (product) => product.id !== action.payload
+          (product) =>
+            !(
+              product.id == action.payload.id &&
+              product.type == action.payload.type
+            )
         );
         saveItemsToLocalStorage(state.cartItems);
         toast.success("Item Removido");

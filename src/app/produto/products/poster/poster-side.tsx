@@ -3,11 +3,28 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Label, RadioGroup } from "@headlessui/react";
 import { POSTER_OBJ } from "./object";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const PosterSide = () => {
+  const router = useRouter();
+  const params = useSearchParams();
   const [color, setColor] = React.useState<(typeof POSTER_OBJ)[number]>(
     POSTER_OBJ[0]
   );
+
+  React.useEffect(() => {
+    const colorParams = params.get("color");
+    if (!colorParams) return;
+    const selectedColor = POSTER_OBJ.find((c) => c.value === colorParams);
+    if (selectedColor) setColor(selectedColor);
+  }, [params]);
 
   return (
     <div className="px-8 pb-12 pt-8">
@@ -17,37 +34,48 @@ const PosterSide = () => {
 
       <div className="relative mt-4 h-full flex flex-col justify-between">
         <div className="flex flex-col gap-6">
-          <RadioGroup
-            value={color}
-            onChange={(value) => {
-              setColor(value);
-            }}
-          >
-            <Label className="text-lg font-semibold">
-              Poster: {color.label}
-            </Label>
-            <div className="mt-3 flex items-center flex-wrap gap-2">
-              {POSTER_OBJ.map((color) => (
-                <RadioGroup.Option
-                  key={color.label}
-                  value={color}
-                  className={({ active, checked }) =>
-                    cn(
-                      "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 active:ring-0 focus:ring-0 active:outline-none focus:outline-none border-2 border-transparent",
-                      {
-                        [`border-${color.tw}`]: active || checked,
-                      }
-                    )
+          <RadioGroup>
+            <Label className="text-lg font-semibold">Selecione o poster</Label>
+            <div className="mt-3 flex items-center">
+              <Select
+                value={color.label}
+                onValueChange={(value) => {
+                  const selectedColor = POSTER_OBJ.find(
+                    (c) => c.label === value
+                  );
+                  if (selectedColor) {
+                    setColor(selectedColor);
+                    router.push(
+                      `?color=${selectedColor.value}&image=${POSTER_OBJ.indexOf(
+                        selectedColor
+                      )}`
+                    );
                   }
-                >
-                  <span
-                    className={cn(
-                      `bg-${color.tw}`,
-                      "h-8 w-8 rounded-full border border-black border-opacity-10"
-                    )}
-                  />
-                </RadioGroup.Option>
-              ))}
+                }}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Selecione o poster" />
+                </SelectTrigger>
+                <SelectContent>
+                  {POSTER_OBJ.map((color) => (
+                    <SelectItem
+                      key={color.label}
+                      value={color.label}
+                      className="flex items-center"
+                    >
+                      <div className="flex items-center gap-2">
+                        <div
+                          className={cn(
+                            `bg-${color.tw}`,
+                            "h-3 w-3 rounded-full border border-black border-opacity-10"
+                          )}
+                        />{" "}
+                        {color.label}
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </RadioGroup>
 

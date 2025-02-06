@@ -2,9 +2,9 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import CaroselImages from "@/components/CaroselImages";
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks/hooks";
 import { addProductToCart } from "@/store/slices/cartSlice";
 import { formatToReal } from "@/lib/utils";
@@ -17,16 +17,22 @@ const DesignPage = ({
   children: React.ReactNode;
   product: (typeof Products)[number];
 }) => {
-  const router = useRouter();
+  const params = useSearchParams();
 
   const dispatch = useAppDispatch();
   function handleAdd() {
+    const defaultType = Products.find((p) => p.id === product.id)?.object[0]
+      .value;
+
+    const type = params.get("color") || defaultType || "default";
+    const imageIndex = params.get("image") || 0;
     const newCartItem = {
       id: product.id,
+      type: type,
       name: product.name,
       price: product.price,
       qty: 1,
-      image: product.images[0].image,
+      image: product.images[+imageIndex].image,
     };
     dispatch(addProductToCart(newCartItem));
     const cartTarget = document?.getElementById(
@@ -67,18 +73,6 @@ const DesignPage = ({
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="flex justify-center items-center mb-10">
-        <Button
-          variant="link"
-          onClick={() => router.push("/")}
-          size="lg"
-          className=" text-white text-xl text-center"
-        >
-          <ArrowLeft />
-          ver mais
-        </Button>
       </div>
     </>
   );

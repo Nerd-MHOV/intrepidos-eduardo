@@ -1,4 +1,4 @@
-import CardItem from "@/components/CardItem";
+import Catalog from "@/components/catalog";
 import HomeAuthor from "@/components/HomeAuthor";
 import HomeHero from "@/components/HomeHero";
 import HomeHighlights from "@/components/HomeHighlights";
@@ -48,52 +48,7 @@ export default function Home() {
       <div className="w-full relative overflow-hidden">
         <div className="absolute h-full w-full bg-[url(/bg2.svg)] top-40 z-0"></div>
         <MaxWidthWrapper className="left-0 top-0 h-full ">
-          <section className="flex justify-around items-center gap-10 flex-wrap my-10">
-            <CardItem
-              id="livro"
-              src="/material/fisico.jpeg"
-              title="Livro"
-              value={90}
-            />
-
-            <CardItem
-              id="luminaria"
-              src="/material/placa-1.jpeg"
-              title="Luminarias"
-              value={150}
-            />
-
-            <CardItem
-              id="copo"
-              src="/material/copo-1.jpeg"
-              title="Copos"
-              value={40}
-            />
-            <CardItem
-              id="camiseta-fan"
-              src="/material/camiseta-1.jpeg"
-              title="Camiseta FAN"
-              value={67}
-            />
-            <CardItem
-              id="camiseta-herois"
-              src="/material/camiseta-2.jpeg"
-              title="Camiseta Heróis"
-              value={67}
-            />
-            <CardItem
-              id="caneca"
-              src="/material/caneca.jpeg"
-              title="Canecas"
-              value={50}
-            />
-            <CardItem
-              id="poster"
-              src="/material/poster-1.jpeg"
-              title="Posters"
-              value={50}
-            />
-          </section>
+          <Catalog />
         </MaxWidthWrapper>
 
         <section className="z-50 bg-[url(/bg.svg)] bg-cover bg-center  bg-black/60 backdrop-blur-lg  p-8 text-white mt-10">

@@ -21,7 +21,7 @@ export const createCheckoutSession = async ({
       const price = Products.find((p) => p.id === product.id)?.price;
       if (!price) throw new Error("Product not found");
       const stripeProduct = await stripe.products.create({
-        name: product.name,
+        name: `${product.name} - ${product.type}`,
         images: [`${process.env.BASE_URL}/${product.image}`],
         default_price_data: {
           currency: "brl",

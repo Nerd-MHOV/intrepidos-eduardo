@@ -10,7 +10,7 @@ const Page = () => {
       <div className="bg-black/20 p-10 rounded backdrop-blur-xl">
         <div className="max-w-xl">
           <p className="text-base fonte-medium text-primary">Muito Obrigado!</p>
-          <h1 className="mt-2 text-zinc-200 text-4xk font-bold tracking-tight sm:text-5xl">
+          <h1 className="mt-2 text-zinc-200 text-4xl font-bold tracking-tight sm:text-5xl">
             Seu pedido esta a caminho!
           </h1>
           <p className="mt-2 text-base text-zinc-400">

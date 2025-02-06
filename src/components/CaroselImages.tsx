@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -10,15 +11,28 @@ import {
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import { cn } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
 
 const CaroselImages = ({
   images,
 }: {
   images: { label: string; image: string }[];
 }) => {
+  const [api, setApi] = React.useState<CarouselApi>();
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
+
+  const params = useSearchParams();
+
+  React.useEffect(() => {
+    const imageParams = params.get("image");
+    if (!imageParams || !api) return;
+    plugin.current.stop();
+    api.scrollTo(+imageParams, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
+
   return (
     <div className="relative h-[30rem] sm:h-[37rem]  overflow-hidden col-span-2 w-full max-w-4xl items-center justify-center ">
       <Carousel
@@ -29,6 +43,7 @@ const CaroselImages = ({
         opts={{
           loop: true,
         }}
+        setApi={setApi}
       >
         <CarouselContent>
           {images.map((image, index) => (

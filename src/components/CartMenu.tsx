@@ -15,7 +15,6 @@ import {
   CartItem,
   decrementQty,
   incrementQty,
-  // removeAllProductsFromCart, // TODO: Success page to clear cart
   removeProductFromCart,
 } from "@/store/slices/cartSlice";
 import {
@@ -73,8 +72,8 @@ export function CartMenu() {
     createPaymentSession({ products: cartItems, cep });
   }
 
-  function handleRemove(id: string) {
-    dispatch(removeProductFromCart(id));
+  function handleRemove(item: CartItem) {
+    dispatch(removeProductFromCart(item));
   }
   const totalSum = cartItems.reduce(
     (sum, item) => sum + item.price * item.qty,
@@ -121,8 +120,9 @@ export function CartMenu() {
                   />
                   <div className="space-y-2">
                     <h2 className="text-lg font-bold">{item.name}</h2>
+                    <h1 className="text-md">-{item.type}</h1>
                     <button
-                      onClick={() => handleRemove(item.id)}
+                      onClick={() => handleRemove(item)}
                       className="text-xs flex items-center text-red-400"
                     >
                       <Trash className="w-4 h-4 mr-1" />
@@ -134,7 +134,7 @@ export function CartMenu() {
                     <div className="flex items-center space-x-3">
                       <button
                         onClick={() => {
-                          dispatch(decrementQty(item.id));
+                          dispatch(decrementQty(item));
                         }}
                         className="border shadow rounded flex items-center justify-center w-7 h-5"
                       >
@@ -144,7 +144,7 @@ export function CartMenu() {
                       <p>{item.qty}</p>
                       <button
                         onClick={() => {
-                          dispatch(incrementQty(item.id));
+                          dispatch(incrementQty(item));
                         }}
                         className="border shadow rounded flex items-center justify-center w-7 h-5 bg-zinc-900 text-white"
                       >

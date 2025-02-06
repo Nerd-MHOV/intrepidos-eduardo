@@ -3,6 +3,7 @@ import DesignPage from "../../../components/design";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Products } from "../products/products";
 import { notFound } from "next/navigation";
+import Catalog from "@/components/catalog";
 
 const Page = async ({
   params,
@@ -32,6 +33,11 @@ const Page = async ({
         <DesignPage product={product}>
           <product.side />
         </DesignPage>
+
+        <h1 className="mt-2 text-zinc-200 text-4xl text-center font-bold tracking-tight sm:text-5xl">
+          Veja o que temos para você!
+        </h1>
+        <Catalog />
       </MaxWidthWrapper>
     </div>
   );
