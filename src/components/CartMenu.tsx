@@ -12,6 +12,7 @@ import {
 import { formatToReal } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/store/hooks/hooks";
 import {
+  CartItem,
   decrementQty,
   incrementQty,
   // removeAllProductsFromCart, // TODO: Success page to clear cart
@@ -27,29 +28,49 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
-import { createCheckoutSession } from "@/app/produto/[id]/actions";
+import { calcFrete, createCheckoutSession } from "@/app/produto/[id]/actions";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { Input } from "./ui/input";
+import { useState } from "react";
 
 export function CartMenu() {
   const router = useRouter();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const dispatch = useAppDispatch();
-
+  const [cep, setCep] = useState("");
   const { mutate: createPaymentSession, isPending: loading } = useMutation({
     mutationKey: ["get-checkout-session"],
-    mutationFn: createCheckoutSession,
+    mutationFn: async (data: { products: CartItem[]; cep: string }) => {
+      const frete = await calcFrete({
+        cep: data.cep,
+        products: data.products,
+      });
+      return createCheckoutSession({
+        products: data.products,
+        frete: frete,
+        cep: data.cep,
+      });
+    },
     onSuccess: ({ url }) => {
       if (url) router.push(url);
       else throw new Error("Unable tto retrieve payment URL.");
     },
-    onError: () => {
+    onError: (error) => {
+      if (error.message) {
+        toast.error(error.message);
+        return;
+      }
       toast.error("Erro ao processar produtos, por favor tente novamente.");
     },
   });
 
   async function checkout() {
-    createPaymentSession({ products: cartItems, frete: 100, cep: "00000000" });
+    if (!cep) {
+      toast.error("Informe o CEP para calcular o frete.");
+      return;
+    }
+    createPaymentSession({ products: cartItems, cep });
   }
 
   function handleRemove(id: string) {
@@ -141,7 +162,25 @@ export function CartMenu() {
                 <p>{formatToReal(totalSum)}</p>
               </div>
             </div>
+
+            <div className="space-y-1 py-3 border-b mb-3 my-10">
+              <div className="flex flex-col gap-2 items-center justify-between text-sm">
+                <h2 className="font-medium">
+                  Informe o CEP onde vai ser entegue:
+                </h2>
+                <Input
+                  type="text"
+                  placeholder="Digite seu CEP"
+                  className="w-full"
+                  value={cep}
+                  onChange={(e) => {
+                    setCep(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
           </div>
+
           <SheetFooter className="gap-2 mt-10">
             {!loading && (
               <SheetClose asChild>

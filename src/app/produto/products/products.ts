@@ -25,6 +25,13 @@ export interface ProductProps {
   images: { label: string; image: string }[];
   price: number;
   side: () => JSX.Element;
+  correios: {
+    weight: number;
+    length: number;
+    height: number;
+    width: number;
+    insurance_value: number;
+  };
 }
 export const Products: ProductProps[] = [
   {
@@ -39,6 +46,13 @@ export const Products: ProductProps[] = [
     ],
     price: 67,
     side: CamisetaFanSide,
+    correios: {
+      weight: 0.2,
+      length: 25,
+      height: 0,
+      width: 20,
+      insurance_value: 67,
+    },
   },
   {
     name: "Camiseta Heróis",
@@ -52,6 +66,13 @@ export const Products: ProductProps[] = [
     ],
     price: 67,
     side: CamisetaHeroisSide,
+    correios: {
+      weight: 0.2,
+      length: 25,
+      height: 0,
+      width: 20,
+      insurance_value: 67,
+    },
   },
   {
     name: "Caneca Intrépidos",
@@ -63,6 +84,13 @@ export const Products: ProductProps[] = [
     })),
     price: 50,
     side: CanecaSide,
+    correios: {
+      weight: 0.5,
+      length: 10,
+      height: 12,
+      width: 7,
+      insurance_value: 50,
+    },
   },
   {
     name: "Copo Intrépidos",
@@ -74,6 +102,13 @@ export const Products: ProductProps[] = [
     })),
     price: 40,
     side: CopoSide,
+    correios: {
+      weight: 0.5,
+      length: 10,
+      height: 24,
+      width: 10,
+      insurance_value: 40,
+    },
   },
   {
     name: "Luminária de LED",
@@ -85,6 +120,13 @@ export const Products: ProductProps[] = [
     })),
     price: 150,
     side: LuminariaSide,
+    correios: {
+      weight: 0.5,
+      length: 15,
+      height: 25,
+      width: 15,
+      insurance_value: 150,
+    },
   },
   {
     name: "Poster Intrépidos",
@@ -96,5 +138,12 @@ export const Products: ProductProps[] = [
     })),
     price: 50,
     side: PosterSide,
+    correios: {
+      weight: 0.1,
+      length: 7,
+      height: 100,
+      width: 7,
+      insurance_value: 50,
+    },
   },
 ] as const;

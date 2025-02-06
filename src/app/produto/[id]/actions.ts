@@ -3,14 +3,17 @@
 import { stripe } from "@/lib/stripe";
 import { CartItem } from "@/store/slices/cartSlice";
 import { Products } from "../products/products";
-
+import CEP from "cep-promise";
 export const createCheckoutSession = async ({
   products,
   frete,
   cep,
 }: {
   products: CartItem[];
-  frete: number;
+  frete: {
+    price: number;
+    delivery_range: { min: number; max: number };
+  };
   cep: string;
 }) => {
   const line_items = await Promise.all(
@@ -49,18 +52,18 @@ export const createCheckoutSession = async ({
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            amount: frete * 100,
+            amount: frete.price * 100,
             currency: "brl",
           },
           display_name: "Entrega Expressa",
           delivery_estimate: {
             minimum: {
               unit: "business_day",
-              value: 5,
+              value: frete.delivery_range.min + 2,
             },
             maximum: {
               unit: "business_day",
-              value: 7,
+              value: frete.delivery_range.max + 2,
             },
           },
         },
@@ -77,4 +80,67 @@ export const createCheckoutSession = async ({
   });
 
   return { url: stripeSession.url };
+};
+
+export const calcFrete = async ({
+  cep,
+  products,
+}: {
+  cep: string;
+  products: CartItem[];
+}) => {
+  if (cep.length < 8) throw new Error("CEP inválido");
+  const sanitizedCep = cep.replace(/\D/g, "");
+  const cepValidate = await CEP(sanitizedCep);
+  if (!cepValidate) throw new Error("CEP inválido");
+
+  const freteProducts = products.map((p) => {
+    const product = Products.find((product) => product.id === p.id);
+    if (!product) throw new Error("Product not found");
+    return {
+      id: product.id,
+      width: product.correios.width,
+      height: product.correios.height,
+      length: product.correios.length,
+      weight: product.correios.weight,
+      insurance_value: product.correios.insurance_value,
+      quantity: p.qty,
+    };
+  });
+  const url = "https://www.melhorenvio.com.br/api/v2/me/shipment/calculate";
+  const options = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: process.env.MELHORENVIO_API_KEY || "",
+      "User-Agent": "Aplicação (email para contato técnico)",
+    },
+    body: JSON.stringify({
+      from: { postal_code: "17380970" },
+      to: { postal_code: "01018020" },
+      products: freteProducts,
+    }),
+  };
+
+  const response = await fetch(url, options);
+  if (!response.ok) throw new Error("Erro ao calcular frete");
+  const frete = await response.json();
+  let returnFrete;
+
+  returnFrete = frete.find((f: { name: string }) => f.name === "PAC");
+
+  if (!returnFrete || !returnFrete.price)
+    returnFrete = frete.find((f: { name: string }) => f.name === "SEDEX");
+
+  if (!returnFrete || !returnFrete.price)
+    throw new Error("Erro ao calcular frete");
+
+  return {
+    price: +returnFrete.price,
+    delivery_range: {
+      min: returnFrete.delivery_range.min,
+      max: returnFrete.delivery_range.max,
+    },
+  };
 };
