@@ -17,10 +17,4 @@ export const CAMISETA_FAN_OBJ = [
     size: "G",
     tw: "zinc-900",
   }, // bg-zinc-900 border-zinc-900
-  {
-    label: "Preta-GG",
-    value: "preta-gg",
-    size: "GG",
-    tw: "zinc-900",
-  }, // bg-zinc-900 border-zinc-900
 ];

@@ -59,6 +59,7 @@ const CopoSide = () => {
             <p>
               Acabamento <b>FOSCO</b>;
             </p>
+            <p>Acompanha abridor de garrafas.</p>
           </div>
         </div>
       </div>

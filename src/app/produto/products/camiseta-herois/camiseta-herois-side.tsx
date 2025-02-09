@@ -68,7 +68,8 @@ const CamisetaHeroisSide = () => {
 
           <div className="relative flex flex-col gap-3 w-full">
             <h2 className="text-lg font-semibold mt-20">Descrição:</h2>
-            <p></p>
+            <p>Camistas tecido DRY FIT PREMIUM.</p>
+            <p>Apenas sob encomenda.</p>
           </div>
         </div>
       </div>
