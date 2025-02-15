@@ -2,7 +2,7 @@
 
 import { stripe } from "@/lib/stripe";
 import { CartItem } from "@/store/slices/cartSlice";
-import { Products } from "../products/products";
+import { Products, ProductsSobDemand } from "../products/products";
 import CEP from "cep-promise";
 export const createCheckoutSession = async ({
   products,
@@ -136,11 +136,18 @@ export const calcFrete = async ({
   if (!returnFrete || !returnFrete.price)
     throw new Error("Erro ao calcular frete");
 
+  let minFrete = returnFrete.delivery_range.min;
+  let maxFrete = returnFrete.delivery_range.max;
+
+  if (products.some((p) => ProductsSobDemand.includes(p.id))) {
+    minFrete += 10;
+    maxFrete += 10;
+  }
   return {
     price: +returnFrete.price,
     delivery_range: {
-      min: returnFrete.delivery_range.min,
-      max: returnFrete.delivery_range.max,
+      min: minFrete,
+      max: maxFrete,
     },
   };
 };

@@ -147,3 +147,9 @@ export const Products: ProductProps[] = [
     },
   },
 ] as const;
+
+export const ProductsSobDemand: (typeof Products)[number]["id"][] = [
+  "luminaria",
+  "poster",
+  "camiseta-herois",
+] as const;
