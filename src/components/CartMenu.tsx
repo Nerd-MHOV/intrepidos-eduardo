@@ -97,14 +97,14 @@ export function CartMenu() {
         </Button>
       </SheetTrigger>
       {cartItems && cartItems.length > 0 ? (
-        <SheetContent className="w-full sm:w-[540px]  bg-black/20 border-gray-800 backdrop-blur-lg text-white">
+        <SheetContent className="w-full sm:w-[540px] flex flex-col max-h-screen bg-black/20 border-gray-800 backdrop-blur-lg text-white">
           <SheetHeader>
             <h2 className="scroll-m-20 text-xl font-semibold tracking-tight first:mt-0 border-b pb-3">
               Seu Carrinho ({cartItems.length})
             </h2>
           </SheetHeader>
           {/* CONTENT HWRE */}
-          <div className="">
+          <div className="flex-1 overflow-auto">
             {cartItems.map((item, i) => {
               return (
                 <div
@@ -162,8 +162,10 @@ export function CartMenu() {
                 <p>{formatToReal(totalSum)}</p>
               </div>
             </div>
+          </div>
 
-            <div className="space-y-1 py-3 border-b mb-3 my-10">
+          <div>
+            <div className="space-y-1 py-3 border-b my-1">
               <div className="flex flex-col gap-2 items-center justify-between text-sm">
                 <h2 className="font-medium">
                   Informe o CEP onde vai ser entegue:
@@ -179,33 +181,33 @@ export function CartMenu() {
                 />
               </div>
             </div>
-          </div>
 
-          <SheetFooter className="gap-2 mt-10">
-            {!loading && (
-              <SheetClose asChild>
-                <Button variant={"secondary"} type="submit">
-                  Continue Comprando
+            <SheetFooter className="gap-2 mt-10">
+              {!loading && (
+                <SheetClose asChild>
+                  <Button variant={"secondary"} type="submit">
+                    Continue Comprando
+                  </Button>
+                </SheetClose>
+              )}
+              {loading ? (
+                <Button
+                  disabled
+                  className="bg-green-700 text-white hover:bg-green-800 rounded w-full"
+                >
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Processando...
                 </Button>
-              </SheetClose>
-            )}
-            {loading ? (
-              <Button
-                disabled
-                className="bg-green-700 text-white hover:bg-green-800 rounded w-full"
-              >
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Processando...
-              </Button>
-            ) : (
-              <Button
-                onClick={checkout}
-                className="bg-green-700 text-white hover:bg-green-800 rounded w-full"
-              >
-                <ShoppingBag /> Comprar
-              </Button>
-            )}
-          </SheetFooter>
+              ) : (
+                <Button
+                  onClick={checkout}
+                  className="bg-green-700 text-white hover:bg-green-800 rounded w-full"
+                >
+                  <ShoppingBag /> Comprar
+                </Button>
+              )}
+            </SheetFooter>
+          </div>
         </SheetContent>
       ) : (
         <SheetContent className="w-full sm:w-[540px] bg-black/20 border-gray-800 backdrop-blur-lg text-white">
