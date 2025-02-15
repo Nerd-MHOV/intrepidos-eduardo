@@ -18,13 +18,6 @@ const CardItem = ({ id, src, title, value }: CardItemProps) => {
     <div
       className="relative w-80 h-96 flex flex-col items-center gap-2 bg-black/60 rounded-lg overflow-hidden backdrop-blur-lg text-white drop-shadow-lg"
       onClick={() => {
-        if (id === "livro") {
-          window.open(
-            "https://www.amazon.com.br/Livros/b?ie=UTF8&node=6740748011",
-            "_blank"
-          );
-          return;
-        }
         router.push(`/produto/${id}`);
       }}
     >

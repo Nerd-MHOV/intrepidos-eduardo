@@ -11,6 +11,8 @@ import LuminariaSide from "./luminaria/luminaria-side";
 import { LUMINARIA_OBJ } from "./luminaria/object";
 import { POSTER_OBJ } from "./poster/object";
 import PosterSide from "./poster/poster-side";
+import { LIVRO_OBJ } from "./livro/object";
+import LivroSide from "./livro/livro-side";
 
 export interface ProductProps {
   id: string;
@@ -34,6 +36,24 @@ export interface ProductProps {
   };
 }
 export const Products: ProductProps[] = [
+  {
+    name: "Livro Intrépidos",
+    id: "livro",
+    object: LIVRO_OBJ,
+    images: LIVRO_OBJ.map((image) => ({
+      label: image.label,
+      image: image.image,
+    })),
+    price: 90,
+    side: LivroSide,
+    correios: {
+      weight: 0.6,
+      length: 20,
+      height: 4,
+      width: 15,
+      insurance_value: 90,
+    },
+  },
   {
     name: "Camiseta Fan",
     id: "camiseta-fan",
