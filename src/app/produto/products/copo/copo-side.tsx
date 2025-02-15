@@ -3,11 +3,20 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Label, RadioGroup } from "@headlessui/react";
 import { COPO_OBJ } from "./object";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const CopoSide = () => {
+  const router = useRouter();
+  const params = useSearchParams();
   const [color, setColor] = React.useState<(typeof COPO_OBJ)[number]>(
     COPO_OBJ[0]
   );
+  React.useEffect(() => {
+    const colorParams = params.get("color");
+    if (!colorParams) return;
+    const selectedColor = COPO_OBJ.find((c) => c.value === colorParams);
+    if (selectedColor) setColor(selectedColor);
+  }, [params]);
 
   return (
     <div className="px-8 pb-12 pt-8">
@@ -21,6 +30,17 @@ const CopoSide = () => {
             value={color}
             onChange={(value) => {
               setColor(value);
+              const selectedColor = COPO_OBJ.find(
+                (c) => c.label === value.label
+              );
+              if (selectedColor) {
+                setColor(selectedColor);
+                router.push(
+                  `?color=${selectedColor.value}&image=${COPO_OBJ.indexOf(
+                    selectedColor
+                  )}`
+                );
+              }
             }}
           >
             <Label className="text-lg font-semibold">

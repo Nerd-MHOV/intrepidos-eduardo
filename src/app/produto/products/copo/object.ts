@@ -9,6 +9,6 @@ export const COPO_OBJ = [
     label: "Branco",
     value: "branco",
     tw: "zinc-100",
-    image: "/material/placa-1.jpeg",
+    image: "/material/copo-branco.jpeg",
   }, // bg-zinc-100 border-zinc-100
 ];
