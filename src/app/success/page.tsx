@@ -26,6 +26,11 @@ const Page = () => {
             <p className="mt-2 text-base text-zinc-400">
               E lembre-se, fique atento ao seu email
             </p>
+
+            <p className="text-base text-zinc-300 mt-5">
+              Em caso de duvidas por favor entre em contato:
+              <b className="text-green-700"> (14) 99194-9478</b>
+            </p>
           </div>
         </div>
       </div>
