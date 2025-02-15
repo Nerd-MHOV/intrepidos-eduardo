@@ -37,14 +37,14 @@ const CamisetaHeroisSide = () => {
             <Label className="text-lg font-semibold">
               Tamanho: {color.size}
             </Label>
-            <div className="mt-3 flex items-center space-x-3">
+            <div className="mt-3 grid grid-cols-3 items-center space-3">
               {CAMISETA_HEROIS_OBJ.map((color) => (
                 <RadioGroup.Option
                   key={color.label}
                   value={color}
                   className={({ active, checked }) =>
                     cn(
-                      "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 active:ring-0 focus:ring-0 active:outline-none focus:outline-none border-2 border-transparent",
+                      "relative flex cursor-pointer items-center justify-center rounded-full p-0.5 active:ring-0 focus:ring-0 active:outline-none focus:outline-none border-2 border-transparent",
                       {
                         [`border-zinc-600`]: active || checked,
                       }
