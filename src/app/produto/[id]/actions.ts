@@ -128,10 +128,10 @@ export const calcFrete = async ({
   const frete = await response.json();
   let returnFrete;
 
-  returnFrete = frete.find((f: { name: string }) => f.name === "PAC");
+  returnFrete = frete.find((f: { name: string }) => f.name === "SEDEX");
 
   if (!returnFrete || !returnFrete.price)
-    returnFrete = frete.find((f: { name: string }) => f.name === "SEDEX");
+    returnFrete = frete.find((f: { name: string }) => f.name === "PAC");
 
   if (!returnFrete || !returnFrete.price)
     throw new Error("Erro ao calcular frete");
