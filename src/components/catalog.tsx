@@ -38,7 +38,7 @@ const Catalog = () => {
       />
       <CardItem
         id="caneca"
-        src="/material/caneca.jpeg"
+        src="/material/caneca-1.jpeg"
         title="Canecas"
         value={50}
       />
