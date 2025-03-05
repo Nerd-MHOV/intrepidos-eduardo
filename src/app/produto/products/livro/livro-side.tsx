@@ -25,6 +25,7 @@ const LivroSide = () => {
               Comprar Pelo Mercado Livre <ShoppingBag />
             </Button>
           </div>
+
           <div className=" w-full h-px bg-zinc-200 my-6" />
 
           <div className="justify-center flex flex-col gap-2">
@@ -41,6 +42,17 @@ const LivroSide = () => {
               }
             >
               Comprar E-BOOK <BookOpen />
+            </Button>
+            <Button
+              className="bg-fuchsia-600 font-bold text-black hover:bg-fuchsia-500"
+              onClick={() =>
+                window.open(
+                  "https://clubedeautores.com.br//livro/intrepidos",
+                  "_blank"
+                )
+              }
+            >
+              Clube de Autores <BookOpen />
             </Button>
           </div>
           <div className=" w-full h-px bg-zinc-200 my-6" />
