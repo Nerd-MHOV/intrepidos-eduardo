@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { BookOpen, ShoppingBag } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 const LivroSide = () => {
@@ -32,6 +33,33 @@ const LivroSide = () => {
             <p className="text-center">
               Compre na versão digital e economize 50%
             </p>
+            <Button
+              className="bg-gray-200 font-bold text-black hover:bg-gray-300 relative"
+              onClick={() => window.open("https://a.co/d/3NdFrQ7", "_blank")}
+            >
+              <Image
+                alt="amazon-logo"
+                src="/amazon.png"
+                width={90}
+                height={20}
+              />
+            </Button>
+            <Button
+              className="bg-gray-200 font-bold text-black hover:bg-gray-300 relative"
+              onClick={() =>
+                window.open(
+                  "https://www.enjoei.com.br/p/livro-intrepidos-118723953",
+                  "_blank"
+                )
+              }
+            >
+              <Image
+                alt="enjoei-logo"
+                src="/enjoei.png"
+                width={90}
+                height={20}
+              />
+            </Button>
             <Button
               className="bg-green-500 font-bold text-black hover:bg-green-400"
               onClick={() =>
