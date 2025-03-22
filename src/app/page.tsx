@@ -51,6 +51,79 @@ export default function Home() {
           <Catalog />
         </MaxWidthWrapper>
 
+        <section className="z-50 bg-[url(/bg.svg)] bg-cover bg-center bg-black/60 backdrop-blur-lg p-8 text-white mt-10">
+          <MaxWidthWrapper className="mb-10">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold">Matérias & Publicações</h2>
+              <p className="text-lg mt-2">
+                Confira o que as principais revistas estão dizendo sobre o
+                livro.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <a
+                href="https://portalsaopaulo.com/eduardo-cagnotto-apresenta-intrepidos-uma-jornada-de-coragem-e-sacrificio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-white bg-opacity-10 hover:bg-opacity-20 transition rounded-lg p-4"
+              >
+                <div className="flex items-center justify-center mb-4 relative w-full h-40">
+                  <Image
+                    src="/logos/portalsaopaulo-logo.png"
+                    alt="Portal São Paulo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-semibold">Portal São Paulo</h3>
+                <p className="text-sm mt-2">
+                  Eduardo Cagnotto apresenta Intrepidos: uma jornada de coragem
+                  e sacrifício.
+                </p>
+              </a>
+              <a
+                href="https://revistaliteratura.com.br/eduardo-cagnotto-apresenta-intrepidos-uma-jornada-de-coragem-e-sacrificio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-white bg-opacity-10 hover:bg-opacity-20 transition rounded-lg p-4"
+              >
+                <div className="flex items-center justify-center mb-4 relative w-full h-40">
+                  <Image
+                    src="/logos/revistaliteratura-logo.jpeg"
+                    alt="Revista Literatura"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-semibold">Revista Literatura</h3>
+                <p className="text-sm mt-2">
+                  Uma jornada de coragem e sacrifício narrada com autenticidade.
+                </p>
+              </a>
+              <a
+                href="https://revistadesaopaulo.com/eduardo-cagnotto-apresenta-intrepidos-uma-jornada-de-coragem-e-sacrificio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-white bg-opacity-10 hover:bg-opacity-20 transition rounded-lg p-4"
+              >
+                <div className="flex items-center justify-center mb-4 relative w-full h-40">
+                  <Image
+                    src="/logos/revistasaopaulo-logo.png"
+                    alt="Revista de São Paulo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-semibold">Revista de São Paulo</h3>
+                <p className="text-sm mt-2">
+                  Uma perspectiva inovadora que destaca elementos únicos da
+                  narrativa.
+                </p>
+              </a>
+            </div>
+          </MaxWidthWrapper>
+        </section>
+
         <section className="z-50 bg-[url(/bg.svg)] bg-cover bg-center  bg-black/60 backdrop-blur-lg  p-8 text-white mt-10">
           <MaxWidthWrapper className="mb-10">
             <div className="mx-auto grid max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16">
