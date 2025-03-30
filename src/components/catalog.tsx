@@ -43,10 +43,10 @@ const Catalog = () => {
         value={50}
       />
       <CardItem
-        id="poster"
-        src="/material/poster-1.jpeg"
-        title="Posters"
-        value={50}
+        id="card"
+        src="/material/card-capa.jpeg"
+        title="Cards"
+        value={15}
       />
     </section>
   );

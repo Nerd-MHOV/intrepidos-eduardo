@@ -9,8 +9,8 @@ import CopoSide from "./copo/copo-side";
 import { COPO_OBJ } from "./copo/object";
 import LuminariaSide from "./luminaria/luminaria-side";
 import { LUMINARIA_OBJ } from "./luminaria/object";
-import { POSTER_OBJ } from "./poster/object";
-import PosterSide from "./poster/poster-side";
+import { CARD_OBJ } from "./card/object";
+import CardSide from "./card/card-side";
 import { LIVRO_OBJ } from "./livro/object";
 import LivroSide from "./livro/livro-side";
 
@@ -149,27 +149,27 @@ export const Products: ProductProps[] = [
     },
   },
   {
-    name: "Poster Intrépidos",
-    id: "poster",
-    object: POSTER_OBJ,
-    images: POSTER_OBJ.map((image) => ({
+    name: "Card Intrépidos",
+    id: "card",
+    object: CARD_OBJ,
+    images: CARD_OBJ.map((image) => ({
       label: image.label,
       image: image.image,
     })),
-    price: 50,
-    side: PosterSide,
+    price: 15,
+    side: CardSide,
     correios: {
-      weight: 0.1,
+      weight: 0.05,
       length: 7,
-      height: 100,
+      height: 10,
       width: 7,
-      insurance_value: 50,
+      insurance_value: 15,
     },
   },
 ] as const;
 
 export const ProductsSobDemand: (typeof Products)[number]["id"][] = [
   "luminaria",
-  "poster",
+  "card",
   "camiseta-herois",
 ] as const;

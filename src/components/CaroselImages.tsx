@@ -53,11 +53,12 @@ const CaroselImages = ({
                   {image.label}
                   <Image
                     src={image.image}
-                    alt={`luminaria-${image.label}`}
+                    alt={`image-${image.label}`}
                     layout="fill"
                     className={cn(
                       "object-center",
-                      image.image.includes("poster")
+                      image.image.includes("card") ||
+                        image.image.includes("poster")
                         ? "object-contain"
                         : "object-cover"
                     )}
