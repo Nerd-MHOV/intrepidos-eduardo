@@ -167,6 +167,7 @@ export const getComments = unstable_cache(
   ["getComments"],
   {
     tags: ["create-comment"],
+    revalidate: 60,
   }
 );
 
