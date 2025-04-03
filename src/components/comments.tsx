@@ -1,48 +1,39 @@
 "use client";
+import { createComment } from "@/app/produto/[id]/actions";
+import { comments } from "@prisma/client";
 import Image from "next/image";
 import React from "react";
 
-const comments = [
-  {
-    text: "Adorei o produto! Muito bom mesmo.",
-    image: "/material/camiseta-1.jpeg",
-    email: "email@mail.com",
-    name: "Lucas",
-  },
-  {
-    text: "A qualidade é incrível, recomendo!",
-    image: "/material/caneca-1.jpeg",
-    email: "email@mail.com",
-    name: "Lucas",
-  },
-  {
-    text: "Não gostei muito do design.",
-    image: null,
-    email: "email@mail.com",
-    name: "Lucas",
-  },
-];
-const Comments = () => {
+const Comments = ({
+  comments,
+  productId,
+}: {
+  comments: comments[];
+  productId: string;
+}) => {
   const [newComment, setNewComment] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [nome, setNome] = React.useState("");
   const [image, setImage] = React.useState<File | null>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setImage(file);
   };
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
     if (newComment) {
-      const newCommentData = {
-        text: newComment,
-        image: image ? URL.createObjectURL(image) : null,
-        email: "mail@mail.com",
-        name: "Matheus",
-      };
-      comments.push(newCommentData);
+      await createComment({
+        productId: productId,
+        message: newComment,
+        image: image,
+        email: email,
+        name: nome,
+      });
       setNewComment("");
       setImage(null);
+      setIsLoading(false);
     }
   };
   return (
@@ -60,7 +51,7 @@ const Comments = () => {
                   <h3 className="text-bold text-sm text-zinc-400">
                     {comment.name}
                   </h3>
-                  <p className="text-zinc-200">{comment.text}</p>
+                  <p className="text-zinc-200">{comment.message}</p>
                   {comment.image && (
                     <Image
                       src={comment.image}
@@ -123,10 +114,11 @@ const Comments = () => {
               />
             </div>
             <button
+              disabled={isLoading}
               type="submit"
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
             >
-              Enviar comentário
+              {isLoading ? "Enviando..." : "Enviar comentário"}
             </button>
           </form>
         </section>

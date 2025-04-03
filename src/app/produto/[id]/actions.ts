@@ -4,6 +4,8 @@ import { stripe } from "@/lib/stripe";
 import { CartItem } from "@/store/slices/cartSlice";
 import { Products, ProductsSobDemand } from "../products/products";
 import CEP from "cep-promise";
+import { db } from "@/lib/db";
+import { revalidateTag, unstable_cache } from "next/cache";
 export const createCheckoutSession = async ({
   products,
   frete,
@@ -151,3 +153,54 @@ export const calcFrete = async ({
     },
   };
 };
+
+
+export const getComments = unstable_cache(
+  async (productId: string) => {
+    const comments = db.comments.findMany({
+      where: {
+        productId,
+      },
+    });
+    return comments;
+  },
+  ["getComments"],
+  {
+    tags: ["create-comment"],
+  }
+);
+
+export const createComment = async (data: {
+  productId: string;
+  name: string;
+  message: string;
+  image: File | null;
+  email: string;
+}) => {
+  const { v2: cloudinary } = await import("cloudinary");
+  const { image, ...rest } = data;
+  let imageUrl = "";
+  if (image) {
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+    const fileBuffer = Buffer.from(await image.arrayBuffer());
+    const base64Image = fileBuffer.toString("base64");
+    const dataUri = `data:${image.type};base64,${base64Image}`;
+    const uploadResponse = await cloudinary.uploader.upload(dataUri, {
+      folder: "uploads/proofs",
+    });
+    imageUrl = uploadResponse.secure_url;
+  }
+  const newComment = db.comments.create({
+    data: {
+      ...rest,
+      image: imageUrl,
+    }
+  });
+
+  revalidateTag("create-comment");
+  return newComment;
+}

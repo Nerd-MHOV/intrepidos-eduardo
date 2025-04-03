@@ -5,6 +5,7 @@ import { Products } from "../products/products";
 import { notFound } from "next/navigation";
 import Catalog from "@/components/catalog";
 import Comments from "@/components/comments";
+import { getComments } from "./actions";
 
 const Page = async ({
   params,
@@ -15,7 +16,7 @@ const Page = async ({
 }) => {
   const { id } = await params;
   const product = Products.find((product) => product.id === id);
-
+  const comments = await getComments(id);
   console.log(product);
   if (!product) return notFound();
 
@@ -35,7 +36,7 @@ const Page = async ({
           <product.side />
         </DesignPage>
 
-        <Comments />
+        <Comments comments={comments} productId={id} />
 
         <h1 className="mt-2 text-zinc-200 text-4xl text-center font-bold tracking-tight sm:text-5xl">
           Veja o que temos para você!
