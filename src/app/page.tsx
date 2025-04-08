@@ -31,16 +31,19 @@ export default function Home() {
         </section>
 
         <section className="my-10 flex overflow-hidden flex-wrap justify-around gap-8 items-center w-full">
-          {/* <div className="overflow-hidden relative rounded-full w-80 h-80 flex justify-center items-center shadow-lg">
-            <Image
-              src="/material/intrepidos.gif"
-              className="object-cover"
-              alt="gif"
-              priority={false}
-              quality={1}
-              layout="fill"
+          <div className="overflow-hidden relative rounded-md w-96 h-auto flex justify-center items-center shadow-lg">
+            <video
+              className="w-full h-full object-contain"
+              src="/video.mp4"
+              poster="/material/poster-14.jpeg"
+              // autoPlay
+              // muted
+              controls
+              loop
+              playsInline
+              preload="metadata"
             />
-          </div> */}
+          </div>
 
           <HomeHighlights />
         </section>
