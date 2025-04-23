@@ -8,6 +8,13 @@ const Catalog = () => {
         id="livro"
         src="/material/fisico.jpeg"
         title="Livro"
+        value={45}
+      />
+
+      <CardItem
+        id="kit-intrepidos"
+        src="/material/box-intrépidos.jpeg"
+        title="Kit presente Intrépidos"
         value={90}
       />
 

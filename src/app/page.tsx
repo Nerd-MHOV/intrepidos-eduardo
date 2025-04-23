@@ -63,7 +63,7 @@ export default function Home() {
                 livro.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <a
                 href="https://portalsaopaulo.com/eduardo-cagnotto-apresenta-intrepidos-uma-jornada-de-coragem-e-sacrificio/"
                 target="_blank"
@@ -123,6 +123,40 @@ export default function Home() {
                   narrativa.
                 </p>
               </a>
+
+              <a
+                href="https://www.facebook.com/share/p/1FRmReSG5d/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-white bg-opacity-10 hover:bg-opacity-20 transition rounded-lg p-4"
+              >
+                <div className="flex items-center justify-center mb-4 relative w-full h-40">
+                  <Image
+                    src="/logos/facebook-publi.jpg"
+                    alt="Portal São Paulo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-semibold">Portal São Paulo</h3>
+                <p className="text-sm mt-2">
+                  Eduardo Cagnotto apresenta Intrepidos: uma jornada de coragem
+                  e sacrifício.
+                </p>
+              </a>
+            </div>
+          </MaxWidthWrapper>
+        </section>
+
+        <section className="z-50 bg-[url(/bg.svg)] bg-cover bg-center bg-black/60 backdrop-blur-lg  text-white mt-10">
+          <MaxWidthWrapper className="mb-10 p-0">
+            <div className="flex items-center justify-center relative w-full h-[400px]">
+              <Image
+                src="/logos/amlh.jpeg"
+                alt="Portal São Paulo"
+                fill
+                className="object-contain"
+              />
             </div>
           </MaxWidthWrapper>
         </section>

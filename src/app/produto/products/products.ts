@@ -13,6 +13,8 @@ import { CARD_OBJ } from "./card/object";
 import CardSide from "./card/card-side";
 import { LIVRO_OBJ } from "./livro/object";
 import LivroSide from "./livro/livro-side";
+import { BOX_OBJ } from "./box/object";
+import BoxSide from "./box/box-side";
 
 export interface ProductProps {
   id: string;
@@ -44,8 +46,26 @@ export const Products: ProductProps[] = [
       label: image.label,
       image: image.image,
     })),
-    price: 90,
+    price: 45,
     side: LivroSide,
+    correios: {
+      weight: 0.6,
+      length: 20,
+      height: 4,
+      width: 15,
+      insurance_value: 45,
+    },
+  },
+  {
+    name: "Kit Presente Intrépidos",
+    id: "kit-intrepidos",
+    object: BOX_OBJ,
+    images: BOX_OBJ.map((image) => ({
+      label: image.label,
+      image: image.image,
+    })),
+    price: 90,
+    side: BoxSide,
     correios: {
       weight: 0.6,
       length: 20,
