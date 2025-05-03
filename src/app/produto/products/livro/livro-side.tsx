@@ -33,17 +33,39 @@ const LivroSide = () => {
             <p className="text-center">
               Compre na versão digital e economize 50%
             </p>
-            <Button
-              className="bg-gray-200 font-bold text-black hover:bg-gray-300 relative"
-              onClick={() => window.open("https://a.co/d/3NdFrQ7", "_blank")}
-            >
-              <Image
-                alt="amazon-logo"
-                src="/amazon.png"
-                width={90}
-                height={20}
-              />
-            </Button>
+
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                className="bg-gray-200 font-bold text-black hover:bg-gray-300 relative"
+                onClick={() => window.open("https://a.co/d/3NdFrQ7", "_blank")}
+              >
+                <Image
+                  alt="amazon-logo"
+                  src="/amazon.png"
+                  width={90}
+                  height={20}
+                />
+              </Button>
+              <Button
+                className="bg-gray-200 font-bold text-black hover:bg-gray-300 relative"
+                onClick={() =>
+                  window.open("https://amzn.in/d/3V0H9MA", "_blank")
+                }
+              >
+                <Image
+                  alt="amazon-logo"
+                  src="/amazon.png"
+                  width={90}
+                  height={20}
+                />
+                <Image
+                  alt="portugal-logo"
+                  src="/logos/portugal.avif"
+                  width={20}
+                  height={20}
+                />
+              </Button>
+            </div>
             <Button
               className="bg-gray-200 font-bold text-black hover:bg-gray-300 relative"
               onClick={() =>
@@ -82,6 +104,42 @@ const LivroSide = () => {
             >
               Clube de Autores <BookOpen />
             </Button>
+
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                className="bg-gray-100 font-bold text-black hover:bg-gray-100 relative"
+                onClick={() =>
+                  window.open(
+                    "https://www.hugendubel.de/de/ebook_epub/eduardo_cagnotto-intrepidos-50293807-produkt-details.html?srsltid=AfmBOorMEWWdj6eNrWN9FVbiw9Gerddg8FkiV2gtXpMFCpY533jtWogb",
+                    "_blank"
+                  )
+                }
+              >
+                <Image
+                  alt="hugendublel-logo"
+                  src="/logos/hugendublel.png"
+                  width={90}
+                  height={20}
+                />
+              </Button>
+
+              <Button
+                className="bg-gray-100 font-bold text-black hover:bg-gray-100 relative"
+                onClick={() =>
+                  window.open(
+                    "https://books.rakuten.co.jp/rk/410d1288d4ca3f85a11d5c3e530d349d/",
+                    "_blank"
+                  )
+                }
+              >
+                <Image
+                  alt="hakuten-logo"
+                  src="/logos/hakuten.png"
+                  width={90}
+                  height={20}
+                />
+              </Button>
+            </div>
           </div>
           <div className=" w-full h-px bg-zinc-200 my-6" />
 
