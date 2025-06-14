@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
+import "../../globals.css";
 import Footer from "@/components/Footer";
 import Providers from "@/providers/Providers";
 import { Analytics } from "@vercel/analytics/react";
+import NavbarEDA from "@/components/NavbarEDA";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,9 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Intrépidos - Loja",
-  description:
-    "Loja de produtos, do livro Intrépidos escrito por Eduardo Cagnotto.",
+  title: "Ecos do Além - Livro",
+  description: "Anúncio do novo livro de Eduardo Cagnotto, Ecos do Além.",
 };
 
 export default function RootLayout({
@@ -30,10 +29,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[url(/bg.svg)] bg-cover bg-center `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[url(/ecos-do-alem/bg.svg)] bg-cover bg-center `}
       >
         <Providers>
-          <Navbar />
+          <NavbarEDA />
           {children}
 
           <Footer />

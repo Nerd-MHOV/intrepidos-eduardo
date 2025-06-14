@@ -1,5 +1,5 @@
 "use client";
-import { createComment } from "@/app/produto/[id]/actions";
+import { createComment } from "@/app/(intrepidos)/produto/[id]/actions";
 import { comments } from "@prisma/client";
 import Image from "next/image";
 import React from "react";

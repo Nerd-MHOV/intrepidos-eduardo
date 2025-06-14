@@ -47,6 +47,28 @@ export default function Home() {
 
           <HomeHighlights />
         </section>
+
+        <section>
+          <div>
+            <a href="/ecos-do-alem" className="block w-full h-full">
+              <div className="overflow-hidden relative bg-white/20 backdrop-blur-lg mx-auto max-w-[300px] py-2 px-8 rounded-md h-auto flex justify-center items-center shadow-lg">
+                <div className="flex flex-col items-center">
+                  <Image
+                    src="/ecos-do-alem/ecos-do-alem2.jpeg"
+                    alt="Ecos do Além"
+                    width={200}
+                    height={300}
+                    className="object-cover rounded-md"
+                  />
+                  <p className="mt-4 text-center text-lg font-semibold">
+                    Conheça também o livro: <br />
+                    <span className="text-green-500">Ecos do Além</span>
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
       </MaxWidthWrapper>
       <div className="w-full relative overflow-hidden">
         <div className="absolute h-full w-full bg-[url(/bg2.svg)] top-40 z-0"></div>

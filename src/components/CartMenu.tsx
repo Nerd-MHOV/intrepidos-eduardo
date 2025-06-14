@@ -27,7 +27,10 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
-import { calcFrete, createCheckoutSession } from "@/app/produto/[id]/actions";
+import {
+  calcFrete,
+  createCheckoutSession,
+} from "@/app/(intrepidos)/produto/[id]/actions";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Input } from "./ui/input";

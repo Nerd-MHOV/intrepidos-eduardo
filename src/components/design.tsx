@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks/hooks";
 import { addProductToCart } from "@/store/slices/cartSlice";
 import { formatToReal } from "@/lib/utils";
-import { Products } from "@/app/produto/products/products";
+import { Products } from "@/app/(intrepidos)/produto/products/products";
 
 const DesignPage = ({
   children,
