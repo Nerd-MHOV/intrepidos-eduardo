@@ -15,6 +15,8 @@ import { LIVRO_OBJ } from "./livro/object";
 import LivroSide from "./livro/livro-side";
 import { BOX_OBJ } from "./box/object";
 import BoxSide from "./box/box-side";
+import { BENFEITORES_OBJ } from "./benfeitores/object";
+import BenfeitoresSide from "./benfeitores/benfeitores-side";
 
 export interface ProductProps {
   id: string;
@@ -186,6 +188,25 @@ export const Products: ProductProps[] = [
       insurance_value: 15,
     },
   },
+  {
+    name: "Benfeitores Litero Culturais da Humanidade",
+    id: "benfeitores",
+    object: BENFEITORES_OBJ,
+    images: BENFEITORES_OBJ.map((image) => ({
+      label: image.label,
+      image: image.image,
+    })),
+    price: 30,
+    side: BenfeitoresSide,
+    correios: {
+      weight: 0.6,
+      length: 20,
+      height: 4,
+      width: 15,
+      insurance_value: 30,
+    },
+  },
+
 ] as const;
 
 export const ProductsSobDemand: (typeof Products)[number]["id"][] = [

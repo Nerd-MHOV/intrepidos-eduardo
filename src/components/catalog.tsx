@@ -55,6 +55,12 @@ const Catalog = () => {
         title="Cards"
         value={15}
       />
+      <CardItem
+        id="benfeitores"
+        src="/material/benfeitores/benfeitores2.jpg"
+        title="Livro: Benfeitores Litero"
+        value={30}
+      />
     </section>
   );
 };
