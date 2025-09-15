@@ -2,11 +2,14 @@ import Catalog from "@/components/catalog";
 import HomeAuthor from "@/components/HomeAuthor";
 import HomeHero from "@/components/HomeHero";
 import HomeHighlights from "@/components/HomeHighlights";
+import HomeComments from "@/components/HomeComments";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Check, Star } from "lucide-react";
 import Image from "next/image";
+import { getHomeComments } from "./actions";
 
-export default function Home() {
+export default async function Home() {
+  const comments = await getHomeComments();
   return (
     <>
       <MaxWidthWrapper className="">
@@ -267,6 +270,9 @@ export default function Home() {
             </div>
           </MaxWidthWrapper>
         </section>
+        
+        {/* Área de comentários da home */}
+        <HomeComments comments={comments} />
       </div>
     </>
   );
