@@ -3,6 +3,8 @@ import HomeAuthor from "@/components/HomeAuthor";
 import HomeHero from "@/components/HomeHero";
 import HomeHighlights from "@/components/HomeHighlights";
 import HomeComments from "@/components/HomeComments";
+import LaunchBanner from "@/components/LaunchBanner";
+import LaunchPopup from "@/components/LaunchPopup";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Check, Star } from "lucide-react";
 import Image from "next/image";
@@ -12,6 +14,12 @@ export default async function Home() {
   const comments = await getHomeComments();
   return (
     <>
+      {/* Popup de lançamento */}
+      <LaunchPopup />
+      
+      {/* Banner de lançamento */}
+      <LaunchBanner />
+      
       <MaxWidthWrapper className="">
         <section className="bg-black/60 backdrop-blur-lg my-10 overflow-hidden">
           <div className="flex justify-center items-center">
