@@ -26,3 +26,14 @@ model comments {
 
   @@index([productId], name: "productId_index")
 }
+
+model rsvp {
+  id        Int      @id @default(autoincrement())
+  name      String
+  whatsapp  String
+  source    String // ex: "popup" | "banner"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([source], name: "source_index")
+}

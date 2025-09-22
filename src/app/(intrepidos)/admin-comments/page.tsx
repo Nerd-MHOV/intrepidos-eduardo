@@ -1,6 +1,12 @@
 "use client";
 
-import { getAllComments, updateCommentResponse, deleteComment } from "@/app/(intrepidos)/actions";
+import {
+  getAllComments,
+  updateCommentResponse,
+  deleteComment,
+  getAllRsvps,
+  deleteRsvp,
+} from "@/app/(intrepidos)/actions";
 import { comments } from "@prisma/client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
@@ -11,13 +17,36 @@ export default function AdminComments() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [comments, setComments] = useState<comments[]>([]);
+  const [rsvps, setRsvps] = useState<
+    Array<{
+      id: number;
+      name: string;
+      whatsapp: string;
+      source: string;
+      createdAt: string | Date;
+    }>
+  >([]);
   const [loading, setLoading] = useState(false);
-  const [responseTexts, setResponseTexts] = useState<{ [key: number]: string }>({});
+  const [responseTexts, setResponseTexts] = useState<{ [key: number]: string }>(
+    {}
+  );
+  const [tab, setTab] = useState<"comments" | "rsvp">("comments");
 
   useEffect(() => {
-    if (isAuthenticated) {
-      loadComments();
-    }
+    if (!isAuthenticated) return;
+    const load = async () => {
+      setLoading(true);
+      try {
+        const [c, r] = await Promise.all([getAllComments(), getAllRsvps()]);
+        setComments(c);
+        setRsvps(r);
+      } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
   }, [isAuthenticated]);
 
   const loadComments = async () => {
@@ -82,7 +111,10 @@ export default function AdminComments() {
           </h1>
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
                 Senha:
               </label>
               <input
@@ -111,7 +143,7 @@ export default function AdminComments() {
     <div className="min-h-screen bg-gray-900 text-white p-4">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Moderação de Comentários</h1>
+          <h1 className="text-3xl font-bold">Moderação</h1>
           <button
             onClick={() => setIsAuthenticated(false)}
             className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
@@ -120,12 +152,34 @@ export default function AdminComments() {
           </button>
         </div>
 
-        {loading ? (
-          <div className="text-center">Carregando comentários...</div>
-        ) : (
+        <div className="mb-6 flex gap-3">
+          <button
+            onClick={() => setTab("comments")}
+            className={`px-4 py-2 rounded ${
+              tab === "comments"
+                ? "bg-green-600"
+                : "bg-gray-700 hover:bg-gray-600"
+            }`}
+          >
+            Comentários
+          </button>
+          <button
+            onClick={() => setTab("rsvp")}
+            className={`px-4 py-2 rounded ${
+              tab === "rsvp" ? "bg-green-600" : "bg-gray-700 hover:bg-gray-600"
+            }`}
+          >
+            Confirmações
+          </button>
+        </div>
+
+        {loading && <div className="text-center">Carregando...</div>}
+        {!loading && tab === "comments" && (
           <div className="space-y-6">
             {comments.length === 0 ? (
-              <p className="text-gray-400 text-center">Nenhum comentário encontrado.</p>
+              <p className="text-gray-400 text-center">
+                Nenhum comentário encontrado.
+              </p>
             ) : (
               comments.map((comment) => (
                 <div key={comment.id} className="bg-gray-800 p-6 rounded-lg">
@@ -134,7 +188,9 @@ export default function AdminComments() {
                       <h3 className="font-semibold text-lg">{comment.name}</h3>
                       <p className="text-gray-400 text-sm">{comment.email}</p>
                       <p className="text-gray-500 text-xs">
-                        {comment.productId === "home" ? "Página Inicial" : `Produto: ${comment.productId}`}
+                        {comment.productId === "home"
+                          ? "Página Inicial"
+                          : `Produto: ${comment.productId}`}
                       </p>
                       <p className="text-gray-500 text-xs">
                         {new Date(comment.createdAt).toLocaleString("pt-BR")}
@@ -164,14 +220,18 @@ export default function AdminComments() {
 
                   {comment.response ? (
                     <div className="bg-green-900/30 p-3 rounded border-l-4 border-green-500">
-                      <p className="text-green-400 font-semibold text-sm">Sua resposta:</p>
+                      <p className="text-green-400 font-semibold text-sm">
+                        Sua resposta:
+                      </p>
                       <p className="text-green-100">{comment.response}</p>
                     </div>
                   ) : (
                     <div className="space-y-2">
                       <textarea
                         value={responseTexts[comment.id] || ""}
-                        onChange={(e) => handleResponseTextChange(comment.id, e.target.value)}
+                        onChange={(e) =>
+                          handleResponseTextChange(comment.id, e.target.value)
+                        }
                         placeholder="Digite sua resposta..."
                         className="w-full p-3 bg-gray-700 text-white rounded resize-none"
                         rows={3}
@@ -185,6 +245,43 @@ export default function AdminComments() {
                       </button>
                     </div>
                   )}
+                </div>
+              ))
+            )}
+          </div>
+        )}
+        {!loading && tab === "rsvp" && (
+          <div className="space-y-4">
+            {rsvps.length === 0 ? (
+              <p className="text-gray-400 text-center">
+                Nenhuma confirmação ainda.
+              </p>
+            ) : (
+              rsvps.map((r) => (
+                <div
+                  key={r.id}
+                  className="bg-gray-800 p-4 rounded-lg flex items-center justify-between"
+                >
+                  <div>
+                    <p className="font-semibold">{r.name}</p>
+                    <p className="text-sm text-gray-300">
+                      WhatsApp: {r.whatsapp}
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      Origem: {r.source} ·{" "}
+                      {new Date(r.createdAt).toLocaleString("pt-BR")}
+                    </p>
+                  </div>
+                  <button
+                    onClick={async () => {
+                      await deleteRsvp(r.id);
+                      const list = await getAllRsvps();
+                      setRsvps(list);
+                    }}
+                    className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700"
+                  >
+                    Excluir
+                  </button>
                 </div>
               ))
             )}

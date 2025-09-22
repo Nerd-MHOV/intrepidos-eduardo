@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import RsvpDialog from "./RsvpDialog";
 
 const LaunchPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ const LaunchPopup = () => {
     // Verifica se o popup já foi fechado hoje
     const today = currentDate.toDateString();
     const lastClosed = localStorage.getItem("launch-popup-closed");
-    
+
     if (lastClosed !== today) {
       setShouldShow(true);
       // Delay para mostrar o popup após carregamento da página
@@ -54,15 +55,18 @@ const LaunchPopup = () => {
   return (
     <>
       {/* Overlay */}
-      <div 
-        className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
-        onClick={handleClose}
-      >
+      <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+        <button
+          type="button"
+          aria-label="Fechar"
+          className="absolute inset-0"
+          onClick={handleClose}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") handleClose();
+          }}
+        />
         {/* Modal */}
-        <div 
-          className="bg-black/95 backdrop-blur-lg text-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative border border-green-500/30"
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className="bg-black/95 backdrop-blur-lg text-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative border border-green-500/30">
           {/* Botão fechar */}
           <button
             onClick={handleClose}
@@ -78,7 +82,8 @@ const LaunchPopup = () => {
                 🎉 LANÇAMENTO OFICIAL! 🎉
               </h2>
               <p className="text-lg text-zinc-200">
-                Eduardo Cagnotto apresenta <span className="font-bold text-green-300">Intrépidos</span>
+                Eduardo Cagnotto apresenta{" "}
+                <span className="font-bold text-green-300">Intrépidos</span>
               </p>
             </div>
 
@@ -97,17 +102,18 @@ const LaunchPopup = () => {
             {/* Informações do evento */}
             <div className="space-y-4 text-center">
               <div className="bg-green-600 text-white p-4 rounded-lg shadow-lg">
-                <p className="text-xl font-bold">
-                  📅 25 de Outubro às 20h
-                </p>
+                <p className="text-xl font-bold">📅 25 de Outubro às 20h</p>
               </div>
 
               <div className="bg-zinc-800/70 backdrop-blur p-4 rounded-lg border border-zinc-600">
                 <p className="font-semibold mb-2 text-green-400">📍 Local:</p>
-                <p className="text-lg font-bold text-zinc-100">Bar e Restaurante Camilo</p>
+                <p className="text-lg font-bold text-zinc-100">
+                  Bar e Restaurante Camilo
+                </p>
                 <p className="text-sm text-zinc-300">Mezanino</p>
                 <p className="text-sm mt-2 text-zinc-300">
-                  Praça Amador Simões, 61, Centro<br />
+                  Praça Amador Simões, 61, Centro
+                  <br />
                   Brotas - SP, 17380-000
                 </p>
               </div>
@@ -115,7 +121,9 @@ const LaunchPopup = () => {
               {/* Contador regressivo */}
               <div className="bg-zinc-800 border-2 border-green-500 p-4 rounded-lg">
                 <p className="text-lg font-bold text-zinc-100">
-                  ⏰ Faltam apenas <span className="text-2xl text-green-400">{diffDays}</span> dia{diffDays !== 1 ? 's' : ''}!
+                  ⏰ Faltam apenas{" "}
+                  <span className="text-2xl text-green-400">{diffDays}</span>{" "}
+                  dia{diffDays !== 1 ? "s" : ""}!
                 </p>
               </div>
 
@@ -125,12 +133,15 @@ const LaunchPopup = () => {
                 <p>☕ Ambiente acolhedor</p>
               </div>
 
-              <button
-                onClick={handleClose}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors mt-6 shadow-lg"
-              >
-                Entendi! Estarei lá! ✨
-              </button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6">
+                <RsvpDialog source="popup" buttonText="Confirmar Presença" />
+                <button
+                  onClick={handleClose}
+                  className="w-full bg-zinc-700 hover:bg-zinc-600 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-lg"
+                >
+                  Fechar
+                </button>
+              </div>
             </div>
           </div>
         </div>

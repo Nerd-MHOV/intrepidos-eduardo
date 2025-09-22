@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import RsvpDialog from "./RsvpDialog";
 
 const LaunchBanner = () => {
   // Data do lançamento: 25/10
@@ -38,20 +39,25 @@ const LaunchBanner = () => {
             <h2 className="text-4xl lg:text-6xl font-bold mb-4 text-green-400">
               LANÇAMENTO OFICIAL!
             </h2>
-            
+
             <div className="mb-6">
               <p className="text-xl lg:text-2xl mb-2">
-                📅 Dia <span className="font-bold text-green-300">25/10 às 20h</span>
+                📅 Dia{" "}
+                <span className="font-bold text-green-300">25/10 às 20h</span>
               </p>
               <p className="text-lg lg:text-xl">
-                📍 No mezanino do <span className="font-bold">Bar e Restaurante Camilo!</span>
+                📍 No mezanino do{" "}
+                <span className="font-bold">Bar e Restaurante Camilo!</span>
               </p>
             </div>
 
             <div className="bg-zinc-800/70 backdrop-blur p-4 rounded-lg mb-6 border border-zinc-600">
-              <p className="text-lg font-semibold mb-2 text-green-400">📍 Endereço:</p>
+              <p className="text-lg font-semibold mb-2 text-green-400">
+                📍 Endereço:
+              </p>
               <p className="text-base text-zinc-200">
-                Praça Amador Simões, 61, Centro<br />
+                Praça Amador Simões, 61, Centro
+                <br />
                 Brotas - SP, 17380-000
               </p>
             </div>
@@ -59,14 +65,20 @@ const LaunchBanner = () => {
             {/* Contador regressivo */}
             <div className="bg-green-600 text-white p-4 rounded-lg inline-block shadow-lg">
               <p className="text-lg font-bold">
-                ⏰ Faltam apenas <span className="text-2xl">{diffDays}</span> dia{diffDays !== 1 ? 's' : ''}!
+                ⏰ Faltam apenas <span className="text-2xl">{diffDays}</span>{" "}
+                dia{diffDays !== 1 ? "s" : ""}!
               </p>
             </div>
 
             <div className="mt-6">
               <p className="text-sm text-zinc-300">
-                Venha conhecer Eduardo Cagnotto pessoalmente e garantir seu exemplar autografado!
+                Venha conhecer Eduardo Cagnotto pessoalmente e garantir seu
+                exemplar autografado!
               </p>
+            </div>
+
+            <div className="mt-6">
+              <RsvpDialog source="banner" />
             </div>
           </div>
         </div>

@@ -10,8 +10,8 @@ export const getHomeComments = unstable_cache(
         productId: "home", // Usamos "home" como identificador para comentários da página inicial
       },
       orderBy: {
-        createdAt: "desc"
-      }
+        createdAt: "desc",
+      },
     });
     return comments;
   },
@@ -31,7 +31,7 @@ export const createHomeComment = async (data: {
   const { v2: cloudinary } = await import("cloudinary");
   const { image, ...rest } = data;
   let imageUrl = "";
-  
+
   if (image) {
     cloudinary.config({
       cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -46,13 +46,13 @@ export const createHomeComment = async (data: {
     });
     imageUrl = uploadResponse.secure_url;
   }
-  
+
   const newComment = await db.comments.create({
     data: {
       ...rest,
       productId: "home", // Identificador para comentários da home
       image: imageUrl,
-    }
+    },
   });
 
   revalidateTag("home-comments");
@@ -63,8 +63,8 @@ export const getAllComments = unstable_cache(
   async () => {
     const comments = await db.comments.findMany({
       orderBy: {
-        createdAt: "desc"
-      }
+        createdAt: "desc",
+      },
     });
     return comments;
   },
@@ -75,14 +75,17 @@ export const getAllComments = unstable_cache(
   }
 );
 
-export const updateCommentResponse = async (commentId: number, response: string) => {
+export const updateCommentResponse = async (
+  commentId: number,
+  response: string
+) => {
   const updatedComment = await db.comments.update({
     where: {
       id: commentId,
     },
     data: {
       response,
-    }
+    },
   });
 
   revalidateTag("home-comments");
@@ -95,11 +98,44 @@ export const deleteComment = async (commentId: number) => {
   const deletedComment = await db.comments.delete({
     where: {
       id: commentId,
-    }
+    },
   });
 
   revalidateTag("home-comments");
   revalidateTag("admin-comments");
   revalidateTag("create-comment");
   return deletedComment;
+};
+
+// RSVPs
+export const createRsvp = async (data: {
+  name: string;
+  whatsapp: string;
+  source: string;
+}) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const newRsvp = await (db as any).rsvp.create({
+    data,
+  });
+  revalidateTag("rsvp-list");
+  return newRsvp;
+};
+
+export const getAllRsvps = unstable_cache(
+  async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rsvps = await (db as any).rsvp.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+    return rsvps;
+  },
+  ["getAllRsvps"],
+  { tags: ["rsvp-list"], revalidate: 30 }
+);
+
+export const deleteRsvp = async (id: number) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const deleted = await (db as any).rsvp.delete({ where: { id } });
+  revalidateTag("rsvp-list");
+  return deleted;
 };
